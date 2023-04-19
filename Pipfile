@@ -5,10 +5,13 @@ name = "pypi"
 
 [packages]
 click = "*"
-pytest = "*"
-utils = "*"
+fabric = "*"
+jinja2 = "*"
+mergedeep = "*"
 mockito = "*"
+pytest = "*"
 pyyaml = "*"
+utils = "*"
 
 [dev-packages]
 
