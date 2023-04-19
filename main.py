@@ -5,4 +5,4 @@ kit = Kit("forwarder", {"collector": {"port": 55000}})
 target = Target("master")
 
 print(kit.contents())
-print(target.execute("hostnamectl"))
+# print(target.execute("hostnamectl"))
