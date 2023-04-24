@@ -1,8 +1,0 @@
-name: "Forwarder install"
-template: "install-debian.sh"
-data: 
-  partner: aiuken
-  customer: supermercadosdia
-  collector:
-    host: delfoscolector1.invisiblebits.com
-    port: 40000
