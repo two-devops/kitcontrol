@@ -5,13 +5,16 @@ from ikcontrol.system import FakeSystem
 class TestConfig:
 
     """
-        testing class
+    testing class
     """
 
 
     def test_init(self):
-        """testing init
+        """
+        testing init
         """
         # when(run).init("ikctl").thenReturn("kits, targets, pipelines")
         init = InitApp("ikctl", FakeSystem())
         assert True == init.build()
+    
+    
