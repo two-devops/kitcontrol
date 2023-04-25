@@ -34,10 +34,9 @@ class InitApp:
         self.path = path
         self.system = system
 
-    def build(self):
-
+    def build_folders(self):
         """
-        Building folders and create config files for all places
+        Building folders 
         """
 
         for folder in self.config["default_config"]:
@@ -45,12 +44,13 @@ class InitApp:
                 path_folder = self.path + '/' + directory
                 if not self.system.mkdir(path_folder):
                     return False
-        
         return True
+    
+    def create_config_files(self):
+        """and create config files for all places
+        """
+        config_file = yml.safe_dump(self.config)
 
-        # config_file = yml.safe_dump(self.config)
+        result = self.system.create_file(self.path, config_file)
 
-        # with open(self.path + '/ikctl.yaml', 'w', encoding="utf-8") as file:
-        #     file.write(config_file)
-
-        # run(["ls", "-1", self.path], text=True, check=True, timeout=30, stdout=True)
+        return result

@@ -5,7 +5,7 @@ setup(
     name='ikcontrol',
     version='1.0.0',
     package_dir={"": "ikcontrol"},
-    # packages=find_packages("ikcontrol"),
+    packages=find_packages("ikcontrol"),
     install_requires=[
         'Click',
     ],
