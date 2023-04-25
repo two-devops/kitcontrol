@@ -1,6 +1,15 @@
-from src.kit import Kit
+import src.kit as k
 
-def test_kit():
-    kit = Kit("forwarder", {"collector": {"port": 2222}})
+def test_kit_default(monkeypatch):
+    monkeypatch.setattr(k, "BASEPATH", "tests/kits")
 
-    assert "port 2222" in kit.contents()
+    kit = k.Kit("test")
+
+    assert "Mike" in kit.contents()
+
+def test_kit_pass_values(monkeypatch):
+    monkeypatch.setattr(k, "BASEPATH", "tests/kits")
+
+    kit = k.Kit("test", {"greeting": "Hello baby :)"})
+
+    assert "baby" in kit.contents()
