@@ -11,7 +11,6 @@ class TestConfig:
     def test_init(self):
         """testing init
         """
-        # when(run).init("ikctl").thenReturn("kits, targets, pipelines")
         init = InitApp(self.path + "/kitctl")
         assert True is init.build_folders()
 
