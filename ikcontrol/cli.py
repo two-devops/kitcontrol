@@ -2,7 +2,6 @@ import click
 
 from init import InitApp
 
-
 @click.group(name='ikctl')
 def ikctl():
     '''
@@ -11,17 +10,17 @@ def ikctl():
     pass
 
 
-@click.command(name="install")
+@click.command(name="kit")
 @click.option('-k', '--kit', required=True, help='kit name that we are installing')
 @click.option('-t', '--target', required=True, help='destination name where we are going to install the kit')
 @click.option('-pa', '--params', required=False, default=None, help='params to adding at command')
-def install(kit, target, params):
+def kit(kits, target, params):
 
     """
     command to run kits on select target/s
     """
 
-    click.echo(kit, target, params)
+    click.echo(kits, target, params)
 
 
 @click.command(name="init")
@@ -31,7 +30,8 @@ def init(path):
     command to initialited ikctl application
     '''
     initapp = InitApp(path)
-    initapp.build()
+    initapp.build_folders()
+    initapp.create_config_files()
 
 
 @click.command(name="add")
@@ -55,4 +55,4 @@ def pipeline(name_pipelile):
 ikctl.add_command(init)
 ikctl.add_command(add)
 ikctl.add_command(pipeline)
-ikctl.add_command(install)
+ikctl.add_command(kit)

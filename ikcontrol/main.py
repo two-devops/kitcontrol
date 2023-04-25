@@ -1,6 +1,5 @@
 import cli
 
-
 def cmd():
 
     """
@@ -8,3 +7,5 @@ def cmd():
     """
 
     cli.ikctl()
+
+cmd()

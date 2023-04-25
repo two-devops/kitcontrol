@@ -1,6 +1,4 @@
 from ikcontrol.init import InitApp
-from ikcontrol.system import FakeSystem
-# from mockito import when
 
 class TestConfig:
 
@@ -8,10 +6,22 @@ class TestConfig:
         testing class
     """
 
+    path = "/tmp"
 
     def test_init(self):
         """testing init
         """
         # when(run).init("ikctl").thenReturn("kits, targets, pipelines")
-        init = InitApp("ikctl", FakeSystem())
-        assert True == init.build()
+        init = InitApp(self.path + "/kitctl")
+        assert True is init.build_folders()
+
+    def test_config_file(self):
+        """testing config files
+        """
+        init = InitApp(self.path + "/kitctl")
+        result = init.create_config_files()
+        config = init.config
+
+        for folder in config["default_config"]:
+            for directory in folder.values():
+                assert directory in result
