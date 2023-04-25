@@ -3,13 +3,14 @@ from ikcontrol.init import InitApp
 class TestConfig:
 
     """
-        testing class
+    testing class
     """
 
     path = "/tmp"
 
     def test_init(self):
-        """testing init
+        """
+        testing init
         """
         init = InitApp(self.path + "/kitctl")
         assert True is init.build_folders()
