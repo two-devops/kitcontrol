@@ -22,6 +22,7 @@ class InitApp:
                 "path_targets": "targets",
                 "path_pipelines": "pipelines" }]}
 
+
     def __init__(self, path, system=System()) -> None:
 
         """
@@ -34,6 +35,7 @@ class InitApp:
         self.path = path
         self.system = system
 
+
     def build_folders(self):
         """
         Building folders 
@@ -45,7 +47,8 @@ class InitApp:
                 if not self.system.mkdir(path_folder):
                     return False
         return True
-    
+
+
     def create_config_files(self):
         """and create config files for all places
         """
