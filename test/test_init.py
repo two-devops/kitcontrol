@@ -1,6 +1,6 @@
 from ikcontrol.init import InitApp
 
-class TestConfig:
+class TestInit:
 
     """
     testing class

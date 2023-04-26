@@ -1,0 +1,4 @@
+default_config:
+- path_kits: kits
+  path_pipelines: pipelines
+  path_targets: targets

@@ -5,7 +5,7 @@ from system import System
 class InitApp:
 
     """
-    Class to build folders needed to running app ikctl
+    Class to build folders
 
     Attributes:
     ----------
@@ -15,7 +15,11 @@ class InitApp:
 
     Methods:
     -------
+    build_folders
+    create_config_files
     """
+
+
     path = ""
     config = { "default_config": [{
                 "path_kits": "kits",
@@ -26,8 +30,6 @@ class InitApp:
     def __init__(self, path, system=System()) -> None:
 
         """
-        Save path to self.path
-
         Args:
             path (_str_): path
         """
@@ -50,7 +52,8 @@ class InitApp:
 
 
     def create_config_files(self):
-        """and create config files for all places
+        """
+        Create config files for all places
         """
         config_file = yml.safe_dump(self.config)
 
