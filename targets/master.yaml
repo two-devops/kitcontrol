@@ -1,5 +1,0 @@
-name: "Master Worker 6"
-host: worker-6.master
-user: kub
-args:
-  key_filename: '/home/miquel/.ssh/id_rsa_kubernetes-unelink'
