@@ -1,7 +1,7 @@
 import click
 
 from init import InitApp
-from add_resources import AddResources
+from add import AddResources
 
 @click.group(name='ikctl')
 def ikctl():
@@ -18,12 +18,12 @@ def init(path):
     '''
     initapp = InitApp(path)
     initapp.build_folders()
-    initapp.create_config_files()
+    initapp.create_config_files("kitcontrol.yaml")
 
 
 @click.command(name="add")
-@click.option('-k', '--kit', help='kit name that we are installing')
-@click.option('-t', '--target', help='destination name where we are going to install the kit')
+@click.option('-k', '--kit', default=None, help='kit name that we are installing')
+@click.option('-t', '--target', default=None, help='destination name where we are going to install the kit')
 @click.option('-p', '--pipeline', default=None, help='params to adding at command')
 def add(kit, target, pipeline):
     '''

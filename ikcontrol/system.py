@@ -18,7 +18,7 @@ class System:
         print(path)
         return run(["mkdir", "-p", path], capture_output=True, text=True, check=True, timeout=30)
 
-    def create_file(self, path, data=None):
+    def create_file(self, path, filename, data=None):
         """
         Create config files 
 
@@ -29,14 +29,28 @@ class System:
             _type_: str
         """
         try:
-            with open(path + '/kitctl.yaml', 'w', encoding="utf-8") as file:
+            with open(path + '/' + filename, 'w', encoding="utf-8") as file:
                 file.write(data)
         except Exception as error:
             print("Error:", error)
 
         try:
-            with open(path + '/kitctl.yaml', 'r', encoding="utf-8") as file:
+            with open(path + '/' + filename, 'r', encoding="utf-8") as file:
                 result = file.read()
             return result
+        except Exception as error:
+            print("Error:", error)
+
+
+    def tmp_files(self, filename, path):
+        """
+        Create temporal files
+
+        Args:
+            path (_str_): path where we are saving temporal file
+        """
+        try:
+            with open("/tmp/" + filename, 'w', encoding="utf-8") as file:
+                file.write(path)
         except Exception as error:
             print("Error:", error)

@@ -1,4 +1,4 @@
-from ikcontrol.add_resources import AddResource
+from ikcontrol.add import AddResources
 
 class TestAddResources:
 

@@ -19,7 +19,7 @@ class TestInit:
         """testing config files
         """
         init = InitApp(self.path + "/kitctl")
-        result = init.create_config_files()
+        result = init.create_config_files("test.yaml")
         config = init.config
 
         for folder in config["default_config"]:
