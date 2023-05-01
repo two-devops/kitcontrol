@@ -1,5 +1,6 @@
 import yaml
 from fabric import Connection
+from .osinfo import OsInfo
 
 BASEPATH = 'targets'
 
@@ -38,4 +39,4 @@ class Target:
                 key, value = line.split("=")
                 osinfo[key] = value.strip('"')
         
-        return osinfo
+        return OsInfo(osinfo.get("ID"), osinfo.get("VERSION_ID"), osinfo.get("NAME"), osinfo.get("PRETTY_NAME"), osinfo.get("VERSION_CODENAME"))
