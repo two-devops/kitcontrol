@@ -2,16 +2,16 @@ from setuptools import setup, find_packages
 
 
 setup(
-    name='ikcontrol',
+    name='kitcontrol',
     version='1.0.0',
-    package_dir={"": "ikcontrol"},
-    packages=find_packages("ikcontrol"),
+    package_dir={"": "kitcontrol"},
+    packages=find_packages("kitcontrol"),
     install_requires=[
         'Click',
     ],
     entry_points={
         'console_scripts': [
-            'ikcontrol = main:cmd',
+            'kitcontrol = main:cmd',
         ],
     },
 )
