@@ -30,9 +30,6 @@ def init(path):
 
 
 @click.command(name="add")
-# @click.option('-k', '--kit', default=None, help='kit name that we are installing')
-# @click.option('-t', '--target', default=None, help='destination name where we are going to install the kit')
-# @click.option('-p', '--pipeline', default=None, help='params to adding at command')
 @click.argument('entity_name', type=click.Choice(ADD))
 @click.argument('name')
 def add(entity_name, name):
