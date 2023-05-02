@@ -33,7 +33,7 @@ class InitApp:
         """
         Args:
             path (_str_):
-            system (_type_, optional): _description_. Defaults to System().
+            system (obj, optional): class injection. Defaults to System().
         """
 
         self.path = path

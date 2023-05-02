@@ -15,7 +15,7 @@ class AddResources:
     def __init__(self, system=System()) -> None:
         """
         Args:
-            system (_type_, optional): _description_. Defaults to System().
+            system (obj, optional): class injection. Defaults to System().
         """
 
         self.system = system
