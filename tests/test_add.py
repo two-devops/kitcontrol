@@ -5,12 +5,17 @@ class TestAddResources:
     """
     testing class AddResource
     """
+    entities = ["kit", "target", "pipeline"]
 
     def test_add_kit(self):
         """
         testing add_kit function
         """
-        pass
+        addresource = AddResources()
+
+        for entity in self.entities:
+            if entity == "kit":
+                assert True is addresource.add_entity(entity, "test")
 
     def test_add_target(self):
         """
