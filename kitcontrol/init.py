@@ -30,11 +30,10 @@ class InitApp:
     }
 
     def __init__(self, path, system=System()) -> None:
-
         """
         Args:
             path (_str_):
-            filename (_str_): 
+            system (_type_, optional): _description_. Defaults to System().
         """
 
         self.path = path

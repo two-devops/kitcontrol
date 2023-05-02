@@ -10,8 +10,15 @@ class AddResources:
     -------
     add_entity()
     """
-
     CONFIG_FILE = ".kitcontrol/kitconfig.yaml"
+
+    def __init__(self, system=System()) -> None:
+        """
+        Args:
+            system (_type_, optional): _description_. Defaults to System().
+        """
+
+        self.system = system
 
     def add_entity(self, entity_name, name):
         """
@@ -23,11 +30,10 @@ class AddResources:
             name (str): name
         """
 
-        sys = System()
 
         if exists(self.CONFIG_FILE):
             if entity_name == "kit":
-                sys.mkdir("kits/" + name)
+                self.system.mkdir("kits/" + name)
         else:
             print(f"Error: File {self.CONFIG_FILE} not found")
 
