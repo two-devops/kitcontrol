@@ -30,7 +30,6 @@ class AddResources:
             name (str): name
         """
 
-
         if exists(self.CONFIG_FILE):
             if entity_name == "kit":
                 self.system.mkdir("kits/" + name)
