@@ -1,4 +1,4 @@
-from ikcontrol.init import InitApp
+from init import InitApp
 
 class TestInit:
 
