@@ -31,8 +31,18 @@ class AddResources:
         """
 
         if exists(self.CONFIG_FILE):
+
             if entity_name == "kit":
                 self.system.mkdir("kits/" + name)
+                self.system.mkfile("kits/"+ name, name+".yaml")
+
+            if entity_name == "target":
+                self.system.mkdir("targets/" + name)
+                self.system.mkfile("targets/"+ name, name+".yaml")
+
+            if entity_name == "pipeline":
+                self.system.mkdir("pipelines/" + name)
+                self.system.mkfile("pipelines/"+ name, name+".yaml")
         else:
             print(f"Error: File {self.CONFIG_FILE} not found")
 
