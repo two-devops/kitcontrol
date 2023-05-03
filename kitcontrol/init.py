@@ -1,5 +1,4 @@
-import os
-import yaml as yml
+
 
 from system import System
 
@@ -56,10 +55,9 @@ class InitApp:
         """
         Create config kitcontrol.yaml
         """
-        config_file = yml.safe_dump(self.CONFIG)
 
         path = self.path + "/" + self.CONFIG["default_config"][0]["path_config"]
 
-        result = self.system.mkfile(path, filename, config_file)
+        result = self.system.mkfile(path, filename, self.CONFIG)
 
         return result

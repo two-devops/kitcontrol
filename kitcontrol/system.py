@@ -1,5 +1,8 @@
 from subprocess import run
 
+import yaml as yml
+
+
 class System:
     """
     Class System
@@ -20,17 +23,20 @@ class System:
 
     def mkfile(self, path, filename, data=None):
         """
-        Create config files 
-
         Args:
-            data (_type_, optional): _str_. Defaults to None.
+            data (_type_, optional) 
 
         Returns:
             _type_: str
         """
+        if data:
+            config_file = yml.safe_dump(data)
+        else:
+            config_file = ""
+
         try:
             with open(path + '/' + filename, 'w', encoding="utf-8") as file:
-                file.write(data)
+                file.write(config_file)
         except Exception as error:
             print("Error:", error)
 
