@@ -1,6 +1,7 @@
 from abc import ABCMeta, abstractmethod
 
 class Connection(metaclass=ABCMeta):
+    """Interface for provider connections"""
     
     @abstractmethod
     def connect(self, host, user=None, port=None, args=None):
