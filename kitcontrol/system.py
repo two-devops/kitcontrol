@@ -4,31 +4,20 @@ import yaml as yml
 
 
 class System:
-    """
-    Class System
-    """
-
+    '''
+    Manage to create folders and files
+    '''
     def mkdir(self, path):
-        """
+        ''' 
         Create fields
-
-        Args:
-            path (_type_): path where we want create fields
-
-        Returns:
-            _type_: bool
-        """
+        ''' 
         print(path)
         return run(["mkdir", "-p", path], capture_output=True, text=True, check=True, timeout=30)
 
     def mkfile(self, path, filename, data=None):
-        """
-        Args:
-            data (_type_, optional) 
-
-        Returns:
-            _type_: str
-        """
+        ''' 
+        Create files
+        '''
         if data:
             config_file = yml.safe_dump(data)
         else:

@@ -9,15 +9,14 @@ class TestInit:
     path = "/tmp"
 
     def test_init(self):
-        """
-        testing init
-        """
+        """testing init"""
+
         init = InitApp(self.path + "/kitctl")
         assert True is init.build_folders()
 
     def test_config_file(self):
-        """testing config files
-        """
+        """testing config files"""
+        
         init = InitApp(self.path + "/kitctl")
         result = init.create_config_files("test.yaml")
         config = init.CONFIG

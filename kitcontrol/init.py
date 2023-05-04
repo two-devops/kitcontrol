@@ -4,21 +4,7 @@ from system import System
 
 class InitApp:
 
-    """
-    Class to build folders
-
-    Attributes:
-    ----------
-    path =  str
-    config = dict
-
-
-    Methods:
-    -------
-    build_folders
-    create_config_files
-    """
-
+    """Create the file structure"""
 
     path = ""
     CONFIG = { "default_config": [{
@@ -29,32 +15,22 @@ class InitApp:
     }
 
     def __init__(self, path, system=System()) -> None:
-        """
-        Args:
-            path (_str_):
-            system (obj, optional): class injection. Defaults to System().
-        """
 
         self.path = path
         self.system = system
 
     def build_folders(self):
-        """
-        Building folders 
-        """
+        """Build folders"""
+
         for folder in self.CONFIG["default_config"]:
             for directory in folder.values():
                 path_folder = self.path + '/' + directory
                 if not self.system.mkdir(path_folder):
                     return False
-
         return True
 
-
     def create_config_files(self, filename):
-        """
-        Create config kitcontrol.yaml
-        """
+        """Create config file"""
 
         path = self.path + "/" + self.CONFIG["default_config"][0]["path_config"]
 
