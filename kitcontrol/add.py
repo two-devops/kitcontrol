@@ -5,7 +5,7 @@ from system import System
 class AddResources:
     """Management of entities: kits, targets and pipelines"""
 
-    CONFIG_FILE = ".kitcontrol/kitconfig.yaml"
+    CONFIG_FILE = ".kitcontrol/config.yaml"
 
     def __init__(self, system=System()) -> None:
 

@@ -9,7 +9,7 @@ ADD = [
     "pipeline"
 ]
 
-CONFIG_NAME = "kitconfig.yaml"
+CONFIG_NAME = "config.yaml"
 
 @click.group(name='kitcontrol')
 def kitcontrol():
