@@ -9,10 +9,11 @@ ADD = [
     "pipeline"
 ]
 
-CONFIG_NAME = "config.yaml"
-
 @click.group(name='kitcontrol')
-def kitcontrol():
+@click.option('-k', '--kit', default=None, help='kit name that we are installing')
+@click.option('-t', '--target', default=None, help='destination name where we are going to install the kit')
+@click.option('-p', '--pipeline', default=None, help='choose pipeline name')
+def kitcontrol(kit, target, pipeline):
     '''
     App to install Kits on targets
     '''
@@ -25,9 +26,7 @@ def init(path):
     command to initialited kitcontrol application
     '''
     initapp = InitApp(path)
-    initapp.build_folders()
-    initapp.create_config_files(CONFIG_NAME)
-
+    initapp.init_app()
 
 @click.command(name="add")
 @click.argument('entity_name', type=click.Choice(ADD))
