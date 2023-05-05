@@ -1,12 +1,11 @@
-
-
 from system import System
 
 class InitApp:
 
-    """Create the file structure"""
+    """Initiated Application"""
 
     path = ""
+
     CONFIG = { "default_config": [{
         "path_kits": "kits",
         "path_targets": "targets",
@@ -14,12 +13,14 @@ class InitApp:
         "path_config": ".kitcontrol" }]
     }
 
+    CONFIG_NAME = "config.yaml"
+
     def __init__(self, path, system=System()) -> None:
 
         self.path = path
         self.system = system
 
-    def build_folders(self):
+    def init_app(self):
         """Build folders"""
 
         for folder in self.CONFIG["default_config"]:
@@ -27,13 +28,9 @@ class InitApp:
                 path_folder = self.path + '/' + directory
                 if not self.system.mkdir(path_folder):
                     return False
-        return True
-
-    def create_config_files(self, filename):
-        """Create config file"""
 
         path = self.path + "/" + self.CONFIG["default_config"][0]["path_config"]
 
-        result = self.system.mkfile(path, filename, self.CONFIG)
+        result = self.system.mkfile(path, self.CONFIG_NAME, self.CONFIG)
 
         return result
