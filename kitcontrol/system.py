@@ -28,10 +28,3 @@ class System:
                 file.write(config_file)
         except Exception as error:
             print("Error:", error)
-
-        try:
-            with open(path + '/' + filename, 'r', encoding="utf-8") as file:
-                result = file.read()
-            return result
-        except Exception as error:
-            print("Error:", error)
