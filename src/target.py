@@ -1,36 +1,41 @@
 import yaml
-from fabric import Connection
+
 from .osinfo import OsInfo
+from .connection import FabricConnection
 
 BASEPATH = 'targets'
 
 class Target:
-    def __init__(self, name):
+    def __init__(self, name, connection=FabricConnection()):
 
         self.name = name
+        self.connection = connection
 
         # Load target config
         self.config = self._load_config()
 
         # Try to connect and auto-detect
-        self.connection = self.get_connection()
+        self.connection.connect(
+            self.config.get('host'), 
+            self.config.get('user', None), 
+            self.config.get('port', None),
+            self.config.get('args', None),
+        )
+
         self.osinfo = self.autodetect()
 
     def _load_config(self):
         return yaml.load(open(f"{BASEPATH}/{self.name}.yaml", "r"), Loader=yaml.loader.SafeLoader)
 
-    def get_connection(self):
-        return Connection(self.config.get('host'), 
-                          self.config.get('user', None), 
-                          self.config.get('port', None),
-                          connect_kwargs=self.config.get('args', None))
-
     def execute(self, command):
-        return self.connection.run(command, hide=True)
+        return self.connection.execute(command)
     
-    def upload(self, file):
-        return self.connection.put(file)
+    def upload(self, file, target=None):
+        return self.connection.upload(file, target)
     
+    def download(self, file, target=None):
+        return self.connection.download(file, target)
+
     def autodetect(self):
         osinfo = {}
 
@@ -39,4 +44,10 @@ class Target:
                 key, value = line.split("=")
                 osinfo[key] = value.strip('"')
         
-        return OsInfo(osinfo.get("ID"), osinfo.get("VERSION_ID"), osinfo.get("NAME"), osinfo.get("PRETTY_NAME"), osinfo.get("VERSION_CODENAME"))
+        return OsInfo(
+            osinfo.get("ID"), 
+            osinfo.get("VERSION_ID"), 
+            osinfo.get("NAME"), 
+            osinfo.get("PRETTY_NAME"), 
+            osinfo.get("VERSION_CODENAME"),
+        )
