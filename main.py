@@ -1,17 +1,18 @@
 # from src.kit import Kit
-from src.target import Target
-from io import StringIO
+# from src.target import Target
+# from io import StringIO
+from src.pipeline import Pipeline
 
 # kit = Kit("forwarder", {"collector": {"port": 55000}})
-target = Target("docker")
+# target = Target("docker")
 
 # print(kit.contents())
 # print(target.osinfo)
 
-string = "POC string as file :D"
-file = StringIO(string)
+# string = "Esta cadena seria el contenido de un template"
+# file = StringIO(string)
+# target.upload(file, "demo.txt")
 
-target.upload(file, "testfile.txt")
+pipeline = Pipeline(kit="helloworld", target="docker", values={"worldof": "Bigman"})
 
-print(target.execute("ls -lah"))
-print(target.execute("cat testfile.txt"))
+print(pipeline.run())

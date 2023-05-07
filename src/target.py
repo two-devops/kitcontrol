@@ -22,6 +22,7 @@ class Target:
             self.config.get('args', None),
         )
 
+        # Autodetect: osinfo + hostname + connectivity (online/offline) ?
         self.osinfo = self.autodetect()
 
     def _load_config(self):

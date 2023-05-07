@@ -6,7 +6,7 @@ from mergedeep import merge
 BASEPATH = 'kits'
 
 class Kit:
-    def __init__(self, name, values={}):
+    def __init__(self, name, values={}, osinfo=None):
 
         self.name = name
 
@@ -17,14 +17,15 @@ class Kit:
         self.data = merge(self.config['data'], values)
 
         # Load template 
-        self.template = self._load_template()
+        self.template = self._load_template(osinfo)
 
     def _load_config(self):
         return yaml.load(open(f"{BASEPATH}/{self.name}/{self.name}.yaml", "r"), Loader=yaml.loader.SafeLoader)
 
-    def _load_template(self):
+    def _load_template(self, osinfo=None):
         env = Environment(loader=FileSystemLoader(f"{BASEPATH}/{self.name}/"))
-        return env.get_template(self.config['template'])
+        
+        return env.get_template((osinfo.id + '-' if osinfo else '') + self.config['template'])
 
     def contents(self):
         return self.template.render(self.data)
