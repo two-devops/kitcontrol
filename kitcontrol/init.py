@@ -15,7 +15,7 @@ class InitApp:
 
     CONFIG_NAME = "config.yaml"
 
-    def __init__(self, path, system=System()) -> None:
+    def __init__(self, path, system=System()):
 
         self.path = path
         self.system = system
@@ -31,6 +31,4 @@ class InitApp:
 
         path = self.path + "/" + self.CONFIG["default_config"][0]["path_config"]
 
-        result = self.system.mkfile(path, self.CONFIG_NAME, self.CONFIG)
-
-        return result
+        self.system.mkfile(path, self.CONFIG_NAME, self.CONFIG)

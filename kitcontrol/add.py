@@ -7,7 +7,7 @@ class AddResources:
 
     CONFIG_FILE = ".kitcontrol/config.yaml"
 
-    def __init__(self, system=System()) -> None:
+    def __init__(self, system=System()):
 
         self.system = system
 
