@@ -1,0 +1,5 @@
+default_config:
+- path_config: .kitcontrol
+  path_kits: kits
+  path_pipelines: pipelines
+  path_targets: targets
