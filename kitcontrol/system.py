@@ -1,4 +1,5 @@
 from subprocess import run
+from os.path import exists
 
 import yaml as yml
 
@@ -28,3 +29,13 @@ class System:
                 file.write(config_file)
         except Exception as error:
             print("Error:", error)
+
+    def search(self, value):
+        '''
+        Search field and file
+        ''' 
+        if exists(value):
+            return True
+        else:
+            return False
+

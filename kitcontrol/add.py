@@ -1,5 +1,3 @@
-from os.path import exists
-
 from system import System
 
 class AddResources:
@@ -14,8 +12,10 @@ class AddResources:
     def add_entity(self, entity_name, name):
         """Create entities; kit, target and pipeline"""
 
-        if exists(self.CONFIG_FILE):
+        # Check if config file exist
+        if self.system.search(self.CONFIG_FILE):
 
+            # Create Folder and yours config files
             if entity_name == "kit":
                 self.system.mkdir("kits/" + name)
                 self.system.mkfile("kits/"+ name, name+".yaml")
