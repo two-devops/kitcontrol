@@ -10,9 +10,9 @@ ADD = [
 ]
 
 @click.group(name='kitcontrol')
-@click.option('-k', '--kit', default=None, help='kit name')
-@click.option('-t', '--target', default=None, help='Destination on running the kit')
-@click.option('-p', '--pipeline', default=None, help='Choose pipeline name')
+@click.option('-k', '--kit', default=None, help='Kit name')
+@click.option('-t', '--target', default=None, help='Target name, destination on running the kit')
+@click.option('-p', '--pipeline', default=None, help='Pipeline name')
 def kitcontrol(kit, target, pipeline):
     '''
     App to install Kits on targets
