@@ -20,7 +20,7 @@ def kitcontrol(kit, target, pipeline):
     pass
 
 @click.command(name="init")
-@click.argument("path")
+@click.argument("path", type=click.Path())
 def init(path):
     '''
     command to initialited kitcontrol application

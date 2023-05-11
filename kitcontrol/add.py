@@ -16,17 +16,12 @@ class AddResources:
         if self.system.search(self.CONFIG_FILE):
 
             # Create Folder and yours config files
-            if entity_name == "kit":
-                self.system.mkdir("kits/" + name)
-                self.system.mkfile("kits/"+ name, name+".yaml")
+            if not self.system.search(entity_name+"s/" + name):
+                self.system.mkdir(entity_name+"s/" + name)
+                self.system.mkfile(entity_name+"s/"+ name, name+".yaml")
+            else:
+                print(f"Error: directory {entity_name}s/{name} exist")
 
-            if entity_name == "target":
-                self.system.mkdir("targets/" + name)
-                self.system.mkfile("targets/"+ name, name+".yaml")
-
-            if entity_name == "pipeline":
-                self.system.mkdir("pipelines/" + name)
-                self.system.mkfile("pipelines/"+ name, name+".yaml")
         else:
             print(f"Error: File {self.CONFIG_FILE} not found")
 
