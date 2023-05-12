@@ -10,6 +10,10 @@ pytest = "*"
 pyyaml = "*"
 utils = "*"
 kitcontrol = {editable = true, path = "."}
+mergedeep = "*"
+fabric = "*"
+decorator = "*"
+jinja2 = "*"
 
 [dev-packages]
 

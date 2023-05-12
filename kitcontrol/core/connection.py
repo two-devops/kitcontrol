@@ -27,7 +27,7 @@ class FabricConnection(Connection):
         self.connection = fabConnection(host, user, port, connect_kwargs=args)
 
     def execute(self, command):
-        return self.connection.run(command, hide=True)
+        return self.connection.run(command)
     
     def upload(self, file, target=None):
         return self.connection.put(file, target)

@@ -2,6 +2,7 @@ import click
 
 from cmds.init import InitApp
 from cmds.add import AddResources
+from core.pipeline import Pipeline
 
 ADD = [
     "kit",
@@ -9,7 +10,7 @@ ADD = [
     "pipeline"
 ]
 
-@click.group(name='kitcontrol')
+@click.group(name='kitcontrol', invoke_without_command=True)
 @click.option('-k', '--kit', default=None, help='Kit name')
 @click.option('-t', '--target', default=None, help='Target name, destination on running the kit')
 @click.option('-p', '--pipeline', default=None, help='Pipeline name')
@@ -17,7 +18,9 @@ def kitcontrol(kit, target, pipeline):
     '''
     App to install Kits on targets
     '''
-    pass
+    print("hello world")
+    # pipeline = Pipeline(kit=kit, target=target)
+    # pipeline.run()
 
 @click.command(name="init")
 @click.argument("path", type=click.Path())
