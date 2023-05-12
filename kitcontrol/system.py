@@ -5,20 +5,17 @@ import yaml as yml
 
 
 class System:
-    '''
-    Manage to create folders and files
-    '''
+    '''Manage to create folders and files'''
+
     def mkdir(self, path):
-        ''' 
-        Create fields
-        ''' 
+        ''' Create fields''' 
+
         print(path)
         return run(["mkdir", "-p", path], capture_output=True, text=True, check=True, timeout=30)
 
     def mkfile(self, path, filename, data=None):
-        ''' 
-        Create files
-        '''
+        ''' Create files'''
+
         if data:
             config_file = yml.safe_dump(data)
         else:
@@ -31,9 +28,8 @@ class System:
             print("Error:", error)
 
     def search(self, value):
-        '''
-        Search field and file
-        ''' 
+        '''Search field and file''' 
+        
         if exists(value):
             return True
         else:
