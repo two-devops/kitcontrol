@@ -1,7 +1,7 @@
 import click
 
-from init import InitApp
-from add import AddResources
+from cmds.init import InitApp
+from cmds.add import AddResources
 
 ADD = [
     "kit",

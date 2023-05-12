@@ -1,4 +1,4 @@
-from system import System
+from .system import System
 
 class AddResources:
     """Management of entities: kits, targets and pipelines"""

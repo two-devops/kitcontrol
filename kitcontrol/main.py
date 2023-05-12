@@ -1,6 +1,6 @@
 import cli
 
-def cmd():
+def command():
 
     """
     cmd function to load cli
@@ -8,4 +8,4 @@ def cmd():
 
     cli.kitcontrol()
 
-cmd()
+command()

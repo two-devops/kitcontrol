@@ -11,7 +11,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'kitcontrol = main:cmd',
+            'kitcontrol = main:command',
         ],
     },
 )
