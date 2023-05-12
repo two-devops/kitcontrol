@@ -9,6 +9,7 @@ mockito = "*"
 pytest = "*"
 pyyaml = "*"
 utils = "*"
+kitcontrol = {editable = true, path = "."}
 
 [dev-packages]
 

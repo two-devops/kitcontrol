@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7e7f71aff3169582f86dff7d502e347164d78f349156ba44f025d0b538317b23"
+            "sha256": "083f6408d841876c3ad5b088c2f32a38ae23b5ad957225fe9b6a78d3cdf5b9d3"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -39,6 +39,10 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==2.0.0"
+        },
+        "kitcontrol": {
+            "editable": true,
+            "path": "."
         },
         "mockito": {
             "hashes": [

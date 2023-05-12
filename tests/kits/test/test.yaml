@@ -1,4 +1,0 @@
-name: "Test kit"
-template: "test.tpl"
-data: 
-  greeting: Hello Mike!
