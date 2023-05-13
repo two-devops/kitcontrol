@@ -10,20 +10,26 @@ ADD = [
     "pipeline"
 ]
 
-@click.group(name='kitcontrol', invoke_without_command=True)
+@click.group(name='kitcontrol')
+def kitcontrol():
+    '''
+    Tool for automatic process
+    '''
+    pass
+
+@click.command(name="run")
 @click.option('-k', '--kit', default=None, help='Kit name')
-@click.option('-t', '--target', default=None, help='Target name, destination on running the kit')
+@click.option('-t', '--target', default=None, help='Target name')
 @click.option('-p', '--pipeline', default=None, help='Pipeline name')
-def kitcontrol(kit, target, pipeline):
+def run(kit, target, pipeline):
     '''
-    App to install Kits on targets
+    command to execute kits
     '''
-    print("hello world")
-    # pipeline = Pipeline(kit=kit, target=target)
-    # pipeline.run()
+    pipeline = Pipeline(kit=kit, target=target)
+    pipeline.run()
 
 @click.command(name="init")
-@click.argument("path", type=click.Path())
+@click.argument("path")
 def init(path):
     '''
     command to initialited kitcontrol application
@@ -43,3 +49,4 @@ def add(entity_name, name):
 
 kitcontrol.add_command(init)
 kitcontrol.add_command(add)
+kitcontrol.add_command(run)
