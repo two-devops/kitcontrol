@@ -1,9 +1,10 @@
-from .system import System
+from cmds.system import System
+from cmds.config import Config
 
-class AddResources:
+class Add:
     """Management of entities: kits, targets and pipelines"""
 
-    CONFIG_FILE = ".kitcontrol/config.yaml"
+    config = Config()
 
     def __init__(self, system=System()):
 
@@ -13,18 +14,19 @@ class AddResources:
         """Create entities; kit, target and pipeline"""
 
         # Check if config file exist
-        if self.system.search(self.CONFIG_FILE):
+        if self.system.search(self.config.PATH_CONFIG_FILE):
 
             # Create Folder and yours config files
             if not self.system.search(entity_name+"s/" + name):
                 if entity_name == "kit":
                     self.system.mkdir(entity_name+"s/" + name)
                     self.system.mkfile(entity_name+"s/"+ name, name+".yaml")
-                self.system.mkfile(entity_name+"s/", name+".yaml")
+                else:
+                    self.system.mkfile(entity_name+"s/", name+".yaml")
             else:
-                print(f"Error: directory {entity_name}s/{name} exist")
+                print(f"Info: directory {entity_name}s/{name} exist")
 
         else:
-            print(f"Error: File {self.CONFIG_FILE} not found")
+            print(f"Info: File {self.config.PATH_CONFIG_FILE} not found")
 
         return True

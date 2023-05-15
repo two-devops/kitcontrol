@@ -1,10 +1,8 @@
 import click
 
-from cmds.init import InitApp
-from cmds.system import System
-from cmds.config import Config
-from cmds.add import AddResources
-from core.pipeline import Pipeline
+from cmds.init import Init
+from cmds.add import Add
+from cmds.run import Run
 
 ADD = [
     "kit",
@@ -20,20 +18,15 @@ def kitcontrol():
     pass
 
 @click.command(name="run")
-@click.option('-k', '--kit', default=None, help='Kit name')
-@click.option('-t', '--target', default=None, help='Target name')
-@click.option('-p', '--pipeline', default=None, help='Pipeline name')
+@click.option('-k', '--kit', required=True, help='Kit name')
+@click.option('-t', '--target', required=True, help='Target name')
+@click.option('-p', '--pipeline', help='Pipeline name')
 def run(kit, target, pipeline):
     '''
     command to execute kits
     '''
-    system = System()
-    config = Config()
-    if  system.search(config.CONFIG_FILE):
-        pipeline = Pipeline(kit=kit, target=target)
-        pipeline.run()
-    else:
-        click.echo(".kitcontrol folder not found")
+    execute = Run(kit, target, pipeline)
+    execute.run()
 
 @click.command(name="init")
 @click.argument("path")
@@ -41,8 +34,8 @@ def init(path):
     '''
     command to initialited kitcontrol application
     '''
-    initapp = InitApp(path)
-    initapp.init_app()
+    init = Init(path)
+    init.init_app()
 
 @click.command(name="add")
 @click.argument('entity_name', type=click.Choice(ADD))
@@ -51,8 +44,8 @@ def add(entity_name, name):
     '''
     command to adding entities: kits, targets or pipelines
     '''
-    added = AddResources()
-    added.add_entity(entity_name, name)
+    add = Add()
+    add.add_entity(entity_name, name)
 
 kitcontrol.add_command(init)
 kitcontrol.add_command(add)
