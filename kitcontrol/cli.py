@@ -1,6 +1,8 @@
 import click
 
 from cmds.init import InitApp
+from cmds.system import System
+from cmds.config import Config
 from cmds.add import AddResources
 from core.pipeline import Pipeline
 
@@ -25,8 +27,13 @@ def run(kit, target, pipeline):
     '''
     command to execute kits
     '''
-    pipeline = Pipeline(kit=kit, target=target)
-    pipeline.run()
+    system = System()
+    config = Config()
+    if  system.search(config.CONFIG_FILE):
+        pipeline = Pipeline(kit=kit, target=target)
+        pipeline.run()
+    else:
+        click.echo(".kitcontrol folder not found")
 
 @click.command(name="init")
 @click.argument("path")

@@ -1,4 +1,4 @@
-from init import InitApp
+from cmds.init import InitApp
 
 class TestInit:
 

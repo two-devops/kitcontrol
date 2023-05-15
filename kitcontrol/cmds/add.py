@@ -17,8 +17,10 @@ class AddResources:
 
             # Create Folder and yours config files
             if not self.system.search(entity_name+"s/" + name):
-                self.system.mkdir(entity_name+"s/" + name)
-                self.system.mkfile(entity_name+"s/"+ name, name+".yaml")
+                if entity_name == "kit":
+                    self.system.mkdir(entity_name+"s/" + name)
+                    self.system.mkfile(entity_name+"s/"+ name, name+".yaml")
+                self.system.mkfile(entity_name+"s/", name+".yaml")
             else:
                 print(f"Error: directory {entity_name}s/{name} exist")
 

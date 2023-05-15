@@ -1,4 +1,4 @@
-from add import AddResources
+from cmds.add import AddResources
 
 class TestAddResources:
     """testing class AddResource"""
