@@ -17,7 +17,7 @@ class Init:
 
         # Check if folder exist
         if self.system.search(self.path):
-            print(f"Error: folder {self.path} exist")
+            print(f"Info: directory {self.path} exist")
             return False
 
         # Create folders
