@@ -29,4 +29,4 @@ class Init:
 
         # Create config file
         path = self.path + "/" + self.config.KIT_CONTROL_CONFIG["default_config"][0]["path_config"]
-        self.system.mkfile(path, self.config.CONFIG_FILE, self.config.KIT_CONTROL_CONFIG)
+        self.system.mkfile(path, self.config.NAME_CONFIG_FILE, self.config.KIT_CONTROL_CONFIG)

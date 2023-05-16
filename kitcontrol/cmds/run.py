@@ -12,11 +12,9 @@ class Run:
         self.target = target
         self.pipeline = pipeline
         self.system = system
+        self.config.check_config()
 
     def run(self):
         """exec kits"""
-        if  self.system.search(self.config.CONFIG_FILE):
-            pipeline = Pipeline(kit=self.kit, target=self.target)
-            pipeline.run()
-        else:
-            print(f"Info: File {self.config.PATH_CONFIG_FILE} not found")
+        pipeline = Pipeline(kit=self.kit, target=self.target)
+        pipeline.run()
