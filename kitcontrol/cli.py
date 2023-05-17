@@ -44,8 +44,8 @@ def add(entity_name, name):
     '''
     command to adding entities: kits, targets or pipelines
     '''
-    add = Add()
-    add.add_entity(entity_name, name)
+    add = Add(entity_name, name)
+    add.add_entity()
 
 kitcontrol.add_command(init)
 kitcontrol.add_command(add)
