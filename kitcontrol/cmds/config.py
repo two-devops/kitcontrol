@@ -1,3 +1,4 @@
+from click import echo
 import sys
 from cmds.system import System
 
@@ -20,4 +21,5 @@ class Config:
     def check_config(self):
         """check config file exist"""
         if not self.system.search(self.PATH_CONFIG_FILE):
-            sys.exit(f"Info: File {self.PATH_CONFIG_FILE} not found")
+            echo(f"File {self.PATH_CONFIG_FILE} not found")
+            sys.exit()

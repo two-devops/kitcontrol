@@ -1,3 +1,4 @@
+from click import echo
 from cmds.system import System
 from cmds.config import Config
 
@@ -17,7 +18,7 @@ class Init:
 
         # Check if folder exist
         if self.system.search(self.path):
-            print(f"Info: directory {self.path} exist")
+            echo(f"{self.path} already exist")
             return False
 
         # Create folders
@@ -25,7 +26,9 @@ class Init:
             for directory in folder.values():
                 path_folder = self.path + '/' + directory
                 if not self.system.mkdir(path_folder):
-                    return False
+                    echo(f"error unknown")
+                else:
+                    echo(f"directory {path_folder} created")
 
         # Create config file
         path = self.path + "/" + self.config.KIT_CONTROL_CONFIG["default_config"][0]["path_config"]
