@@ -1,4 +1,4 @@
-from add import AddResources
+from cmds.add import Add
 
 class TestAddResources:
     """testing class AddResource"""
@@ -8,7 +8,7 @@ class TestAddResources:
     def test_entities(self):
         """testing entities function"""
 
-        addresource = AddResources()
+        addresource = Add()
 
         for entity in self.entities:
             if entity == "kit":

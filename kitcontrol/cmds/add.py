@@ -1,28 +1,41 @@
-from .system import System
+from click import echo
+from cmds.system import System
+from cmds.config import Config
 
-class AddResources:
+class Add:
     """Management of entities: kits, targets and pipelines"""
 
-    CONFIG_FILE = ".kitcontrol/config.yaml"
+    config = Config()
 
-    def __init__(self, system=System()):
+    def __init__(self, entity_name, name, system=System()):
 
+        self.entity_name = entity_name
+        self.name = name
         self.system = system
-
-    def add_entity(self, entity_name, name):
-        """Create entities; kit, target and pipeline"""
-
-        # Check if config file exist
-        if self.system.search(self.CONFIG_FILE):
-
-            # Create Folder and yours config files
-            if not self.system.search(entity_name+"s/" + name):
-                self.system.mkdir(entity_name+"s/" + name)
-                self.system.mkfile(entity_name+"s/"+ name, name+".yaml")
-            else:
-                print(f"Error: directory {entity_name}s/{name} exist")
-
+        self.config.check_config()
+    
+    def add_entity(self):
+        """create entities"""
+        if self.entity_name == 'kit':
+            self.create_kits()
         else:
-            print(f"Error: File {self.CONFIG_FILE} not found")
+            self.create_targets_or_pipelines()
 
-        return True
+    def create_kits(self):
+        """create kits"""
+
+        if not self.system.search(self.entity_name+"s/" + self.name):
+            self.system.mkdir(self.entity_name+"s/" + self.name)
+            self.system.mkfile(self.entity_name+"s/"+ self.name, self.name+".yaml")
+            echo(f"create {self.entity_name}: {self.name}.yaml")
+        else:
+            echo(f"{self.entity_name} {self.name}.yaml already exist")
+
+    def create_targets_or_pipelines(self):
+        """create targets or pipelines"""
+
+        if not self.system.search(self.entity_name+"s/" + self.name + ".yaml"):
+            self.system.mkfile(self.entity_name+"s/", self.name+".yaml")
+            echo(f"create {self.entity_name}: {self.name}.yaml")
+        else:
+            echo(f"{self.entity_name} {self.name}.yaml already exist")

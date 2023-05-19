@@ -1,8 +1,8 @@
 import click
 
-from cmds.init import InitApp
-from cmds.add import AddResources
-from core.pipeline import Pipeline
+from cmds.init import Init
+from cmds.add import Add
+from cmds.run import Run
 
 ADD = [
     "kit",
@@ -10,26 +10,32 @@ ADD = [
     "pipeline"
 ]
 
-@click.group(name='kitcontrol', invoke_without_command=True)
-@click.option('-k', '--kit', default=None, help='Kit name')
-@click.option('-t', '--target', default=None, help='Target name, destination on running the kit')
-@click.option('-p', '--pipeline', default=None, help='Pipeline name')
-def kitcontrol(kit, target, pipeline):
+@click.group(name='kitcontrol')
+def kitcontrol():
     '''
-    App to install Kits on targets
+    Tool for automatic process
     '''
-    print("hello world")
-    # pipeline = Pipeline(kit=kit, target=target)
-    # pipeline.run()
+    pass
+
+@click.command(name="run")
+@click.option('-k', '--kit', required=True, help='Kit name')
+@click.option('-t', '--target', required=True, help='Target name')
+@click.option('-p', '--pipeline', help='Pipeline name')
+def run(kit, target, pipeline):
+    '''
+    command to execute kits
+    '''
+    execute = Run(kit, target, pipeline)
+    execute.run()
 
 @click.command(name="init")
-@click.argument("path", type=click.Path())
+@click.argument("path")
 def init(path):
     '''
     command to initialited kitcontrol application
     '''
-    initapp = InitApp(path)
-    initapp.init_app()
+    init = Init(path)
+    init.init_app()
 
 @click.command(name="add")
 @click.argument('entity_name', type=click.Choice(ADD))
@@ -38,8 +44,9 @@ def add(entity_name, name):
     '''
     command to adding entities: kits, targets or pipelines
     '''
-    added = AddResources()
-    added.add_entity(entity_name, name)
+    add = Add(entity_name, name)
+    add.add_entity()
 
 kitcontrol.add_command(init)
 kitcontrol.add_command(add)
+kitcontrol.add_command(run)
