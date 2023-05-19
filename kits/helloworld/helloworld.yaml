@@ -1,4 +1,14 @@
 name: "Hello world kit"
-template: "helloworld.sh"
+
+files:
+  - hello.sh
+  - upload.zip
+  - decompress.py
+  - bye.sh
+
+
+
+
 data: 
   worldof: "Two-devops"
+
