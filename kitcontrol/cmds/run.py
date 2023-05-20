@@ -9,10 +9,11 @@ class Run:
 
     config = Config()
 
-    def __init__(self, kit, target, pipeline=None, system=System()):
+    def __init__(self, kit, target, pipeline=None, sudo=None, system=System()):
         self.kit = kit
         self.target = target
         self.pipeline = pipeline
+        self.sudo = sudo
         self.system = system
         self.config.check_config()
         self.check_exist_entities()
@@ -25,9 +26,9 @@ class Run:
     def check_exist_entities(self):
         """Check exist"""
         if not self.system.search("kits/"+self.kit):
-            echo("kit not found")
+            echo(f"Info: kit {self.kit} not found")
             sys.exit()
 
         if not self.system.search("targets/"+self.target+".yaml"):
-            echo("target not found")
+            echo(f"Info: target {self.target} not found")
             sys.exit()

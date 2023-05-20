@@ -21,5 +21,5 @@ class Config:
     def check_config(self):
         """check config file exist"""
         if not self.system.search(self.PATH_CONFIG_FILE):
-            echo(f"File {self.PATH_CONFIG_FILE} not found")
+            echo(f"not a kitconfig directory, the {self.PATH_CONFIG_FILE} not found")
             sys.exit()
