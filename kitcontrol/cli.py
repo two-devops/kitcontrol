@@ -21,11 +21,12 @@ def kitcontrol():
 @click.option('-k', '--kit', required=True, help='Kit name')
 @click.option('-t', '--target', required=True, help='Target name')
 @click.option('-p', '--pipeline', help='Pipeline name')
-def run(kit, target, pipeline):
+@click.option('-s', '--sudo', help='super user permisions')
+def run(kit, target, pipeline, sudo):
     '''
     command to execute kits
     '''
-    execute = Run(kit, target, pipeline)
+    execute = Run(kit, target, pipeline, sudo)
     execute.run()
 
 @click.command(name="init")
