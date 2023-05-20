@@ -3,12 +3,10 @@ import click
 from cmds.init import Init
 from cmds.add import Add
 from cmds.run import Run
+from cmds.show import Show
 
-ADD = [
-    "kit",
-    "target",
-    "pipeline"
-]
+ADD = ["kit", "target", "pipeline"]
+SHOW = ["kits", "targets", "pipelines"]
 
 @click.group(name='kitcontrol')
 def kitcontrol():
@@ -48,6 +46,16 @@ def add(entity_name, name):
     add = Add(entity_name, name)
     add.add_entity()
 
+@click.command(name="show")
+@click.argument("entity", type=click.Choice(SHOW))
+def show(entity):
+    '''
+    command to show entities
+    '''
+    show = Show(entity)
+    show.show_entity()
+
 kitcontrol.add_command(init)
 kitcontrol.add_command(add)
 kitcontrol.add_command(run)
+kitcontrol.add_command(show)
