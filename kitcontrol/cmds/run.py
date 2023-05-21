@@ -1,5 +1,5 @@
 import sys
-from click import echo
+from click import echo, style
 from cmds.system import System
 from cmds.config import Config
 from core.pipeline import Pipeline
@@ -26,9 +26,9 @@ class Run:
     def check_exist_entities(self):
         """Check exist"""
         if not self.system.search("kits/"+self.kit):
-            echo(f"Info: kit {self.kit} not found")
+            echo(style(f"Info: kit {self.kit} not found", fg="yellow"))
             sys.exit()
 
         if not self.system.search("targets/"+self.target+".yaml"):
-            echo(f"Info: target {self.target} not found")
+            echo(style(f"Info: target {self.target} not found", fg="yellow"))
             sys.exit()

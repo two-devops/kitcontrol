@@ -1,4 +1,4 @@
-from click import echo
+from click import echo, style
 from cmds.system import System
 from cmds.config import Config
 
@@ -27,15 +27,15 @@ class Add:
         if not self.system.search(self.entity_name+"s/" + self.name):
             self.system.mkdir(self.entity_name+"s/" + self.name)
             self.system.mkfile(self.entity_name+"s/"+ self.name, self.name+".yaml")
-            echo(f"create {self.entity_name}: {self.name}.yaml")
+            echo(style(f"Info: create {self.entity_name}: {self.name}.yaml", fg="green"))
         else:
-            echo(f"{self.entity_name} {self.name}.yaml already exist")
+            echo(style(f"Warn: {self.entity_name} {self.name}.yaml already exist", fg="yellow"))
 
     def create_targets_or_pipelines(self):
         """create targets or pipelines"""
 
         if not self.system.search(self.entity_name+"s/" + self.name + ".yaml"):
             self.system.mkfile(self.entity_name+"s/", self.name+".yaml")
-            echo(f"create {self.entity_name}: {self.name}.yaml")
+            echo(style(f"Info: create {self.entity_name}: {self.name}.yaml", fg="green"))
         else:
-            echo(f"{self.entity_name} {self.name}.yaml already exist")
+            echo(style(f"Warn: {self.entity_name} {self.name}.yaml already exist", fg="yellow"))
