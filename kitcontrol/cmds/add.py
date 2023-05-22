@@ -26,7 +26,7 @@ class Add:
 
         if not self.system.search(self.entity_name+"s/" + self.name):
             self.system.mkdir(self.entity_name+"s/" + self.name)
-            self.system.mkfile(self.entity_name+"s/"+ self.name, self.name+".yaml")
+            self.system.mkfile(self.entity_name+"s/"+ self.name, self.name+".yaml", self.config.KIT_CONFIG)
             echo(style(f"Info: create {self.entity_name}: {self.name}.yaml", fg="green"))
         else:
             echo(style(f"Warn: {self.entity_name} {self.name}.yaml already exist", fg="yellow"))
@@ -35,7 +35,10 @@ class Add:
         """create targets or pipelines"""
 
         if not self.system.search(self.entity_name+"s/" + self.name + ".yaml"):
-            self.system.mkfile(self.entity_name+"s/", self.name+".yaml")
+            if self.entity_name == "target":
+                self.system.mkfile(self.entity_name+"s/", self.name+".yaml", self.config.TARGET_CONFIG)
+            else:
+                self.system.mkfile(self.entity_name+"s/", self.name+".yaml", self.config.PIPELINE_CONFIG)
             echo(style(f"Info: create {self.entity_name}: {self.name}.yaml", fg="green"))
         else:
             echo(style(f"Warn: {self.entity_name} {self.name}.yaml already exist", fg="yellow"))

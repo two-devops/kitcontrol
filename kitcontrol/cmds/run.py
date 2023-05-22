@@ -26,9 +26,9 @@ class Run:
     def check_exist_entities(self):
         """Check exist"""
         if not self.system.search("kits/"+self.kit):
-            echo(style(f"Info: kit {self.kit} not found", fg="yellow"))
+            echo(style(f"\nInfo: kit {self.kit} not found\n", fg="yellow"))
             sys.exit()
 
         if not self.system.search("targets/"+self.target+".yaml"):
-            echo(style(f"Info: target {self.target} not found", fg="yellow"))
+            echo(style(f"\nInfo: target {self.target} not found\n", fg="yellow"))
             sys.exit()

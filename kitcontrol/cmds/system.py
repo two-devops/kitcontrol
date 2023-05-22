@@ -1,8 +1,6 @@
 from subprocess import run, PIPE
 from os.path import exists
 
-import yaml as yml
-
 class System:
     """Manage to create folders and files"""
 
@@ -24,7 +22,7 @@ class System:
     def mkfile(self, path, filename, data=None):
         """ Create files"""
         if data:
-            config_file = yml.safe_dump(data)
+            config_file = data
         else:
             config_file = ""
         try:
