@@ -1,5 +1,6 @@
-from click import echo, style
 import sys
+
+from click import echo, style
 from cmds.system import System
 
 class Config:
