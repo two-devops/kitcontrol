@@ -1,7 +1,7 @@
 # from src.kit import Kit
 # from src.target import Target
 # from io import StringIO
-from src.pipeline import Pipeline
+from core.pipeline import Pipeline
 
 # kit = Kit("forwarder", {"collector": {"port": 55000}})
 # target = Target("docker")

@@ -2,11 +2,13 @@ import yaml
 
 from jinja2 import Environment, FileSystemLoader
 from mergedeep import merge
+from os.path import exists
+from io import StringIO
 
 BASEPATH = 'kits'
 
 class Kit:
-    def __init__(self, name, values={}, osinfo=None):
+    def __init__(self, name, values={}):
 
         self.name = name
 
@@ -16,16 +18,27 @@ class Kit:
         # Merge values
         self.data = merge(self.config['data'], values)
 
-        # Load template 
-        self.template = self._load_template(osinfo)
+        # Set jinja2 environment (templates dir)
+        self.env = Environment(loader=FileSystemLoader(f"{BASEPATH}/{self.name}/"))
 
     def _load_config(self):
         return yaml.load(open(f"{BASEPATH}/{self.name}/{self.name}.yaml", "r"), Loader=yaml.loader.SafeLoader)
 
-    def _load_template(self, osinfo=None):
-        env = Environment(loader=FileSystemLoader(f"{BASEPATH}/{self.name}/"))
-        
-        return env.get_template((osinfo.id + '-' if osinfo else '') + self.config['template'])
 
-    def contents(self):
-        return self.template.render(self.data)
+    def getFiles(self, osInfo=None):
+
+        files = {}
+
+        for filename in self.config['files']:
+
+            # Distro prefix
+            if osInfo and exists(f"{BASEPATH}/{self.name}/{osInfo.id}-{filename}"):
+                filename = f"{osInfo.id}-{filename}"
+
+            # Load template
+            template = self.env.get_template(filename)
+            
+            # Add to dict files
+            files[filename] = StringIO(template.render(self.data))
+
+        return files

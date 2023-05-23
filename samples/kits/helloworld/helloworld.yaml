@@ -1,4 +1,8 @@
 name: "Hello world kit"
-template: "helloworld.sh"
+
+files: 
+  - helloworld.sh
+  - byeworld.sh
+
 data: 
-  worldof: "Two-devops"
+  worldof: Two-devops
