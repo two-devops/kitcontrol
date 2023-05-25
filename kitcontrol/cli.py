@@ -47,13 +47,15 @@ def add(entity_name, name):
     add.add_entity()
 
 @click.command(name="show")
+@click.option("-e", "--edit",help="edit kits, target or pipelines")
 @click.argument("entity", type=click.Choice(SHOW))
-def show(entity):
+def show(entity, edit):
     '''
     command to show entities
     '''
-    show = Show(entity)
-    show.show_entity()
+    Show(entity, edit)
+    # show = Show(entity, edit)
+    # show.show_entity()
 
 kitcontrol.add_command(init)
 kitcontrol.add_command(add)

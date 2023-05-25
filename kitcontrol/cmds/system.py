@@ -1,3 +1,4 @@
+from click import edit
 from subprocess import run, PIPE
 from os.path import exists
 
@@ -37,3 +38,7 @@ class System:
             return True
         else:
             return False
+
+    def mkedit(self, file):
+        """Edit file"""
+        edit(filename=file)
