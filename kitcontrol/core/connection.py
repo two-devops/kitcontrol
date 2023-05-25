@@ -9,7 +9,7 @@ class Connection(metaclass=ABCMeta):
         """Connect to target"""
     
     @abstractmethod
-    def execute(self, command):
+    def execute(self, command, sudo=False):
         """Execute command"""
     
     @abstractmethod
@@ -26,7 +26,10 @@ class FabricConnection(Connection):
     def connect(self, host, user=None, port=None, args=None):
         self.connection = fabConnection(host, user, port, connect_kwargs=args)
 
-    def execute(self, command):
+    def execute(self, command, sudo=False):
+        if sudo:
+            return self.connection.sudo(command)
+        
         return self.connection.run(command)
     
     def upload(self, file, target=None):
@@ -40,7 +43,7 @@ class FakeConnection(Connection):
     def connect(self, host, user=None, port=None, args=None):
         self.connection = {"host": host, "user": user, "port": port, "args": args}
 
-    def execute(self, command):
+    def execute(self, command, sudo=False):
         return f"Executed command {command}"
     
     def upload(self, file, target=None):

@@ -2,6 +2,7 @@ name: "Hello world kit"
 
 files: 
   - helloworld.sh
+  - hellopython.py
   - byeworld.sh
 
 data: 

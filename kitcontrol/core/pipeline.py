@@ -26,13 +26,12 @@ class Pipeline:
 
             self.target.upload(file, name)
 
-            # # Upload kit contents and execute on target
-            # self.target.upload(StringIO(self.kit.contents()), self.kit.config['template'])
-
-            # if file extension in .sh or .py add to pipeline.sh
-            pipeline += f"bash {name}\n"
+            if name.endswith(".sh"):
+                pipeline += f"bash {name}\n"
+            
+            elif name.endswith(".py"):
+                pipeline += f"python {name}\n"
 
         # Finally upload and execute "bash pipeline.sh" with sudo if indicated on params / config
-        # return self.target.execute(f"bash {self.kit.config['template']}")
         self.target.upload(StringIO(pipeline), "pipeline.sh")
         self.target.execute(f"bash pipeline.sh")

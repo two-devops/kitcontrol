@@ -28,8 +28,8 @@ class Target:
     def _load_config(self):
         return yaml.load(open(f"{BASEPATH}/{self.name}.yaml", "r"), Loader=yaml.loader.SafeLoader)
 
-    def execute(self, command):
-        return self.connection.execute(command)
+    def execute(self, command, sudo=False):
+        return self.connection.execute(command, sudo)
     
     def upload(self, file, target=None):
         return self.connection.upload(file, target)

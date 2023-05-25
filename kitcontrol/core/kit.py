@@ -39,6 +39,7 @@ class Kit:
             template = self.env.get_template(filename)
             
             # Add to dict files
-            files[filename] = StringIO(template.render(self.data))
+            data = merge(self.data, {"osInfo": osInfo}) if osInfo else self.data
+            files[filename] = StringIO(template.render(data))
 
         return files
