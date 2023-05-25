@@ -9,13 +9,13 @@ class Show:
 
     config = Config()
 
-    def __init__(self, entity, edit=None, system=System()) -> None:
+    def __init__(self, entity, file=None, system=System()) -> None:
 
         self.entity = entity
         self.system = system
-        self.edit = edit
+        self.file = file
         self.config.check_config()
-        if not self.edit:
+        if not self.file:
             self.show_entity()
         else:
             self.edit_entity()
@@ -33,18 +33,19 @@ class Show:
         self.check_exist_entities()
 
         if self.entity == "kits":
-            file = self.entity+"/"+self.edit+"/"+self.edit+".yaml"
+            file = self.entity+"/"+self.file+"/"+self.file+".yaml"
         else:
-            file = self.entity+"/"+self.edit+".yaml"
+            file = self.entity+"/"+self.file+".yaml"
         self.system.mkedit(file)
 
     def check_exist_entities(self):
         """Check exist"""
         if self.entity == "kits":
-            if not self.system.search("kits/"+self.edit):
-                echo(style(f"\nInfo: {self.edit} not found in {self.entity}\n", fg="yellow"))
+            if not self.system.search("kits/"+self.file):
+                echo(style(f"\nInfo: {self.file} not found in {self.entity}\n", fg="yellow"))
                 sys.exit()
         else:
-            if not self.system.search(self.entity+"/"+self.edit+".yaml"):
-                echo(style(f"\nInfo: {self.edit} not found in {self.entity}\n", fg="yellow"))
+            # print(self.entity+"/"+self.edit+".yaml")
+            if not self.system.search(self.entity+"/"+self.file+".yaml"):
+                echo(style(f"\nInfo: {self.file} not found in {self.entity}\n", fg="yellow"))
                 sys.exit()
