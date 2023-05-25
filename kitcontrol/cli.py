@@ -51,11 +51,9 @@ def add(entity_name, name):
 @click.argument("entity", type=click.Choice(SHOW))
 def show(entity, edit):
     '''
-    command to show entities
+    command to show entities and edit
     '''
     Show(entity, edit)
-    # show = Show(entity, edit)
-    # show.show_entity()
 
 kitcontrol.add_command(init)
 kitcontrol.add_command(add)
