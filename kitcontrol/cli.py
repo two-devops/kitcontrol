@@ -43,8 +43,7 @@ def add(entity_name, name):
     '''
     command to adding entities: kits, targets or pipelines
     '''
-    add = Add(entity_name, name)
-    add.add_entity()
+    Add(entity_name, name)
 
 @click.command(name="show")
 @click.option("-e", "--edit",help="edit kits, target or pipelines")

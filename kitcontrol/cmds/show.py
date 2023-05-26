@@ -22,7 +22,13 @@ class Show:
 
     def show_entity(self):
         """show kits"""
-        values = self.system.mkls(self.entity)
+        if self.entity == "kits":
+            values = self.system.mkls(self.config.path_kits)
+        elif self.entity == "targets":
+            values = self.system.mkls(self.config.path_targets)
+        else:
+            values = self.system.mkls(self.config.path_pipelines)
+
         echo(style(f"\n{self.entity}\n", fg="blue"))
         echo(style(f'{values}', fg='green', italic=True))
     
@@ -33,9 +39,9 @@ class Show:
         self.check_exist_entities()
 
         if self.entity == "kits":
-            file = self.entity+"/"+self.file+"/"+self.file+".yaml"
+            file = self.config.path_kits+"/"+self.file+"/"+self.file+".yaml"
         else:
-            file = self.entity+"/"+self.file+".yaml"
+            file = (self.config.path_targets if self.entity == "pipelines" else self.config.path_pipelines)+"/"+self.file+".yaml"
         self.system.mkedit(file)
 
     def check_exist_entities(self):
@@ -45,7 +51,6 @@ class Show:
                 echo(style(f"\nInfo: {self.file} not found in {self.entity}\n", fg="yellow"))
                 sys.exit()
         else:
-            # print(self.entity+"/"+self.edit+".yaml")
             if not self.system.search(self.entity+"/"+self.file+".yaml"):
                 echo(style(f"\nInfo: {self.file} not found in {self.entity}\n", fg="yellow"))
                 sys.exit()

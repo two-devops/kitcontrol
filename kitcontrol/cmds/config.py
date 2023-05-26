@@ -1,11 +1,12 @@
 import sys
+import yaml
+from yaml.loader import SafeLoader
 
 from click import echo, style
 from cmds.system import System
 
 class Config:
     """Class to save configs"""
-
     NAME_CONFIG_FILE = "config.yaml"
     PATH_CONFIG_FILE = ".kitcontrol/config.yaml"
 
@@ -100,9 +101,23 @@ class Config:
 
     def __init__(self, system=System()):
         self.system = system
+        self.path_folders = self.load_config()
+        self.path_kits = self.path_folders["default_config"][0]["path_kits"]
+        self.path_targets = self.path_folders["default_config"][0]["path_targets"]
+        self.path_pipelines = self.path_folders["default_config"][0]["path_pipelines"]
 
     def check_config(self):
-        """check config file exist"""
+        """checking if config file exist"""
         if not self.system.search(self.PATH_CONFIG_FILE):
             echo(style(f"\nInfo: There isn't a .kitconfig directory, the {self.PATH_CONFIG_FILE} not found\n", fg="yellow"))
             sys.exit()
+
+    def load_config(self):
+        """load .kitconfig/config.yaml"""
+        self.check_config()
+        with open(self.PATH_CONFIG_FILE, "r", encoding="utf8") as config_file:
+            try:
+                data = yaml.load(config_file, Loader=SafeLoader)
+            except yaml.YAMLError as err:
+                echo(f"{err}")
+        return data
