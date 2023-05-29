@@ -15,6 +15,15 @@ def kitcontrol():
     '''
     pass
 
+@click.command(name="init")
+@click.argument("path")
+def init(path):
+    '''
+    command to initialited kitcontrol application
+    '''
+    init = Init(path)
+    init.init_app()
+
 @click.command(name="run")
 @click.option('-k', '--kit', required=True, help='Kit name')
 @click.option('-t', '--target', required=True, help='Target name')
@@ -26,15 +35,6 @@ def run(kit, target, pipeline, sudo):
     '''
     execute = Run(kit, target, pipeline, sudo)
     execute.run()
-
-@click.command(name="init")
-@click.argument("path")
-def init(path):
-    '''
-    command to initialited kitcontrol application
-    '''
-    init = Init(path)
-    init.init_app()
 
 @click.command(name="add")
 @click.argument('entity_name', type=click.Choice(ADD))

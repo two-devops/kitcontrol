@@ -15,6 +15,7 @@ class Show:
         self.system = system
         self.file = file
         self.config.check_config()
+        self.kits, self.targets, self.pipelines = self.config.load_config()
         if not self.file:
             self.show_entity()
         else:
@@ -23,11 +24,11 @@ class Show:
     def show_entity(self):
         """show kits"""
         if self.entity == "kits":
-            values = self.system.mkls(self.config.path_kits)
+            values = self.system.mkls(self.kits)
         elif self.entity == "targets":
-            values = self.system.mkls(self.config.path_targets)
+            values = self.system.mkls(self.targets)
         else:
-            values = self.system.mkls(self.config.path_pipelines)
+            values = self.system.mkls(self.pipelines)
 
         echo(style(f"\n{self.entity}\n", fg="blue"))
         echo(style(f'{values}', fg='green', italic=True))
@@ -39,18 +40,24 @@ class Show:
         self.check_exist_entities()
 
         if self.entity == "kits":
-            file = self.config.path_kits+"/"+self.file+"/"+self.file+".yaml"
+            file = self.kits + "/" + self.file + "/" + self.file+".yaml"
+        elif self.entity == "targets":
+            file = self.targets + "/" + self.file + ".yaml"
         else:
-            file = (self.config.path_targets if self.entity == "pipelines" else self.config.path_pipelines)+"/"+self.file+".yaml"
+            file = self.pipelines + "/" + self.file + ".yaml"
         self.system.mkedit(file)
 
     def check_exist_entities(self):
         """Check exist"""
         if self.entity == "kits":
-            if not self.system.search("kits/"+self.file):
+            if not self.system.search(self.kits + "/" + self.file):
+                echo(style(f"\nInfo: {self.file} not found in {self.entity}\n", fg="yellow"))
+                sys.exit()
+        elif self.entity == "targets":
+            if not self.system.search(self.targets + "/" + self.file + ".yaml"):
                 echo(style(f"\nInfo: {self.file} not found in {self.entity}\n", fg="yellow"))
                 sys.exit()
         else:
-            if not self.system.search(self.entity+"/"+self.file+".yaml"):
+            if not self.system.search(self.pipelines + "/" + self.file + ".yaml"):
                 echo(style(f"\nInfo: {self.file} not found in {self.entity}\n", fg="yellow"))
                 sys.exit()

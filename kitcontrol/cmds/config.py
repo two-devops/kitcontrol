@@ -101,10 +101,6 @@ class Config:
 
     def __init__(self, system=System()):
         self.system = system
-        self.path_folders = self.load_config()
-        self.path_kits = self.path_folders["default_config"][0]["path_kits"]
-        self.path_targets = self.path_folders["default_config"][0]["path_targets"]
-        self.path_pipelines = self.path_folders["default_config"][0]["path_pipelines"]
 
     def check_config(self):
         """checking if config file exist"""
@@ -114,10 +110,15 @@ class Config:
 
     def load_config(self):
         """load .kitconfig/config.yaml"""
-        self.check_config()
+        # self.check_config()
         with open(self.PATH_CONFIG_FILE, "r", encoding="utf8") as config_file:
             try:
                 data = yaml.load(config_file, Loader=SafeLoader)
             except yaml.YAMLError as err:
                 echo(f"{err}")
-        return data
+            
+            kit = data["default_config"][0]["path_kits"]
+            target = data["default_config"][0]["path_targets"]
+            pipeline = data["default_config"][0]["path_pipelines"]
+
+        return kit, target, pipeline
