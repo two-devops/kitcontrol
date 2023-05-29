@@ -116,9 +116,8 @@ class Config:
                 data = yaml.load(config_file, Loader=SafeLoader)
             except yaml.YAMLError as err:
                 echo(f"{err}")
-            
-            kit = data["default_config"][0]["path_kits"]
-            target = data["default_config"][0]["path_targets"]
-            pipeline = data["default_config"][0]["path_pipelines"]
+        kit = data["default_config"][0]["path_kits"]
+        target = data["default_config"][0]["path_targets"]
+        pipeline = data["default_config"][0]["path_pipelines"]
 
         return kit, target, pipeline
