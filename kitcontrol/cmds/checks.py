@@ -10,14 +10,16 @@ class Checks:
     def __init__(self) -> None:
         self.config = Config()
         self.system = System()
-        # self.kits, self.targets, self.pipelines = self.config.load_config()
 
-    def check_if_exist_folder(self, path):
+    def check_if_not_exist(self, path, message=None):
         """check if exist folder"""
         if not self.system.search(path):
-            echo(style(f"\nInfo: {self.file} not found in {self.entity}\n", fg="yellow"))
+            echo(style(f"\nInfo: {path} {message}\n", fg="yellow"))
             sys.exit()
 
-    def check_if_exist_file(self):
-        """check if exist file"""
-        pass
+    def check_if_exist(self, path, message=None):
+        """check if exist folder"""
+        if self.system.search(path):
+            echo(style(f"\nInfo: {path} {message}\n", fg="yellow"))
+            sys.exit()
+    
