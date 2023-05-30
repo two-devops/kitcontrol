@@ -1,19 +1,19 @@
-import sys
-
 from click import echo, style
+
+from cmds.checks import Checks
 from cmds.system import System
 from cmds.config import Config
 
 class Show:
     """Class to show kits, targets and pipelines"""
 
-    config = Config()
-
     def __init__(self, entity, file=None, system=System()) -> None:
 
+        self.file = file
         self.entity = entity
         self.system = system
-        self.file = file
+        self.config = Config()
+        self.check = Checks()
         self.config.check_config()
         self.kits, self.targets, self.pipelines = self.config.load_config()
         if not self.file:
@@ -36,28 +36,13 @@ class Show:
     def edit_entity(self):
         """edit kits, targets or pipelines"""
 
-        # Check if exits entity
-        self.check_exist_entities()
-
         if self.entity == "kits":
+            self.check.check_if_not_exist(self.kits + "/" + self.file, "not found")
             file = self.kits + "/" + self.file + "/" + self.file+".yaml"
         elif self.entity == "targets":
+            self.check.check_if_not_exist(self.targets + "/" + self.file + ".yaml", "not found")
             file = self.targets + "/" + self.file + ".yaml"
         else:
+            self.check.check_if_not_exist(self.pipelines + "/" + self.file + ".yaml", "not found")
             file = self.pipelines + "/" + self.file + ".yaml"
         self.system.mkedit(file)
-
-    def check_exist_entities(self):
-        """Check exist"""
-        if self.entity == "kits":
-            if not self.system.search(self.kits + "/" + self.file):
-                echo(style(f"\nInfo: {self.file} not found in {self.entity}\n", fg="yellow"))
-                sys.exit()
-        elif self.entity == "targets":
-            if not self.system.search(self.targets + "/" + self.file + ".yaml"):
-                echo(style(f"\nInfo: {self.file} not found in {self.entity}\n", fg="yellow"))
-                sys.exit()
-        else:
-            if not self.system.search(self.pipelines + "/" + self.file + ".yaml"):
-                echo(style(f"\nInfo: {self.file} not found in {self.entity}\n", fg="yellow"))
-                sys.exit()
