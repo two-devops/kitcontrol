@@ -24,11 +24,11 @@ class Show:
     def show_entity(self):
         """show kits"""
         if self.entity == "kits":
-            values = self.system.mkls(self.kits)
+            values = self.system.ls(self.kits)
         elif self.entity == "targets":
-            values = self.system.mkls(self.targets)
+            values = self.system.ls(self.targets)
         else:
-            values = self.system.mkls(self.pipelines)
+            values = self.system.ls(self.pipelines)
 
         echo(style(f"\n{self.entity}\n", fg="blue"))
         echo(style(f'{values}', fg='green', italic=True))
@@ -45,4 +45,4 @@ class Show:
         else:
             self.check.check_if_not_exist(self.pipelines + "/" + self.file + ".yaml", "not found")
             file = self.pipelines + "/" + self.file + ".yaml"
-        self.system.mkedit(file)
+        self.system.edit(file)

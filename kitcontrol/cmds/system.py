@@ -12,10 +12,19 @@ class System:
         except FileExistsError as err:
             print(err)
 
-    def mkls(self, entity):
+    def ls(self, entity):
         """ Show fields and files"""
         try:
             process = run(["ls", "-1", entity], check=True, stdout=PIPE, universal_newlines=True, timeout=30)
+            return process.stdout
+        except FileNotFoundError as err:
+            print(err)
+
+    def rm(self, entity):
+        """ remove fields and files"""
+        print(entity)
+        try:
+            process = run(["rm", "-rf", entity], check=True, stdout=PIPE, universal_newlines=True, timeout=30)
             return process.stdout
         except FileNotFoundError as err:
             print(err)
@@ -39,6 +48,6 @@ class System:
         else:
             return False
 
-    def mkedit(self, file):
+    def edit(self, file):
         """Edit file"""
         edit(filename=file)

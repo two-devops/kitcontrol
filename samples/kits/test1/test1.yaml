@@ -1,0 +1,55 @@
+---
+    name: "Test kit to explore possibilities"
+
+    # Extensions:
+
+    # .sh -> render and run with "bash xxx.sh"
+    # .py -> render and run with "python xxx.py"
+
+    # .others -> only upload
+
+    files:
+    - install-tdagent.sh
+    - tdagent.*
+
+    # If find a folder with distro name, upload all files inside
+    # - /debian
+
+    # Distro-based files INSIDE /distro folder
+    # Ex: /debian/install-tdagent.sh
+
+    # executable files can be prefixed with distro. Ex: debian-install-tdagent.sh
+    - public.key
+    - install-key.sh
+    - add-sudoers.py
+    - install-tdagent.sh
+
+    # Key-distro specific files:
+    - ['debian']:
+        - docker.deb
+    
+    - ['redhat']:
+        - docker.rpm
+
+
+    ## Returns dict with filename: contents or filepath
+
+    ## Ex:
+    # { 
+    # 'public.key': './public.key', 
+    # 'install-key.sh': 'renderer contents in string.....',
+    # 'add-sudoers.py': 'renderer contents in string.....',
+    # }
+
+    data: 
+    # Data first-level (common)
+    worldof: "world of bash"
+
+    '[install-key.sh]':
+        # Second-level (key with file name)
+        worldof: "World of python"
+
+
+    '[add-sudoers.py]':
+        # Second-level (key with file name)
+        worldof: "World of python
