@@ -34,4 +34,4 @@ class Pipeline:
 
         # Finally upload and execute "bash pipeline.sh" with sudo if indicated on params / config
         self.target.upload(StringIO(pipeline), "pipeline.sh")
-        self.target.execute(f"bash pipeline.sh")
+        self.target.execute(f"bash pipeline.sh", sudo=True)

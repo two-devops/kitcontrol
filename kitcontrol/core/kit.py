@@ -3,7 +3,7 @@ import yaml
 from jinja2 import Environment, FileSystemLoader
 from mergedeep import merge
 from os.path import exists
-from io import StringIO
+from io import StringIO, BytesIO
 
 BASEPATH = 'kits'
 
@@ -40,6 +40,8 @@ class Kit:
             
             # Add to dict files
             data = merge(self.data, {"osInfo": osInfo}) if osInfo else self.data
-            files[filename] = StringIO(template.render(data))
+            # files[filename] = StringIO(template.render(data))
+            # BytesIO to support emojis ;D
+            files[filename] = BytesIO(template.render(data).encode('utf-8'))
 
         return files

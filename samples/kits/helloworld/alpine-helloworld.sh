@@ -1,8 +1,8 @@
 #!/bin/bash
 
-echo "Hello world of {{ worldof }}, this is a {{ osInfo.id }} distro :) !!"
+echo -e "\n\nHello world of {{ worldof }}, this is a {{ osInfo.id }} distro :) !!"
 
-echo -e "contingut de la pipilene: \n"
+echo -e "\nContingut de la pipeline: \n"
 cat pipeline.sh
 
-echo -e "\n"
+sudo echo -e "\nSudo dixit 😉 \n"

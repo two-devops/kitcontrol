@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from fabric import Connection as fabConnection
+from fabric import Connection as fabConnection, Config as fabConfig
 
 class Connection(metaclass=ABCMeta):
     """Interface for provider connections"""
@@ -24,7 +24,8 @@ class Connection(metaclass=ABCMeta):
 class FabricConnection(Connection):
 
     def connect(self, host, user=None, port=None, args=None):
-        self.connection = fabConnection(host, user, port, connect_kwargs=args)
+        config = fabConfig({'sudo': {'password': args.get('password', None)}})
+        self.connection = fabConnection(host, user, port, config, connect_kwargs=args)
 
     def execute(self, command, sudo=False):
         if sudo:
