@@ -22,7 +22,6 @@ class System:
 
     def rm(self, entity):
         """ remove fields and files"""
-        print(entity)
         try:
             process = run(["rm", "-rf", entity], check=True, stdout=PIPE, universal_newlines=True, timeout=30)
             return process.stdout
