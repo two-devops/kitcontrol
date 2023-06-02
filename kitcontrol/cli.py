@@ -4,6 +4,7 @@ from cmds.init import Init
 from cmds.add import Add
 from cmds.run import Run
 from cmds.show import Show
+from cmds.wizard import Wizard
 from cmds.remove import Remove
 
 ADD = ["kit", "target", "pipeline"]
@@ -67,8 +68,17 @@ def show(entity, edit):
     '''
     Show(entity, edit)
 
+@click.command(name="wizard")
+@click.argument("entity", type=click.Choice(ADD))
+def wizard(entity):
+    '''
+    command to show entities and edit
+    '''
+    Wizard(entity)
+
 kitcontrol.add_command(init)
 kitcontrol.add_command(add)
 kitcontrol.add_command(run)
 kitcontrol.add_command(show)
 kitcontrol.add_command(rm)
+kitcontrol.add_command(wizard)

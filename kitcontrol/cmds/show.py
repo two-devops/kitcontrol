@@ -29,13 +29,11 @@ class Show:
             values = self.system.ls(self.targets)
         else:
             values = self.system.ls(self.pipelines)
-
         echo(style(f"\n{self.entity}\n", fg="blue"))
         echo(style(f'{values}', fg='green', italic=True))
-    
+
     def edit_entity(self):
         """edit kits, targets or pipelines"""
-
         if self.entity == "kits":
             self.check.check_if_not_exist(self.kits + "/" + self.file, "not found")
             file = self.kits + "/" + self.file + "/" + self.file+".yaml"
