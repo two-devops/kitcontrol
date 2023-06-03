@@ -1,0 +1,10 @@
+---
+    name: "Docker openssh-server"
+    host: 10.10.0.150
+    user: kub
+    port: 22
+    args:
+        # password: password
+        allow_agent: false
+        look_for_keys: false
+        key_filename: '/home/dml/.ssh/id_rsa_kubernetes-unelink'
