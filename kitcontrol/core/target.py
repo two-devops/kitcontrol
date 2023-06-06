@@ -20,6 +20,7 @@ class Target:
             self.config.get('user', None), 
             self.config.get('port', None),
             self.config.get('args', None),
+            self.config.get('sudo', None),
         )
 
         # Autodetect: osinfo + hostname + connectivity (online/offline) ?
@@ -28,8 +29,8 @@ class Target:
     def _load_config(self):
         return yaml.load(open(f"{BASEPATH}/{self.name}.yaml", "r"), Loader=yaml.loader.SafeLoader)
 
-    def execute(self, command, sudo=False):
-        return self.connection.execute(command, sudo)
+    def execute(self, command, hide=False, sudo=False):
+        return self.connection.execute(command, hide, sudo)
     
     def upload(self, file, target=None):
         return self.connection.upload(file, target)
@@ -40,7 +41,7 @@ class Target:
     def autodetect(self):
         osinfo = {}
 
-        if release := self.execute("cat /etc/os-release"):
+        if release := self.execute("cat /etc/os-release", hide=True):
             for line in release.stdout.splitlines():
                 key, value = line.split("=")
                 osinfo[key] = value.strip('"')

@@ -8,11 +8,12 @@ from io import StringIO
 BASEPATH = 'pipelines'
 
 class Pipeline:
-    def __init__(self, name='commandline', kit='', target='', values: object = {}):
+    def __init__(self, name='commandline', kit='', target='', sudo=False, values: object = {}):
         # Use command params...
         if name == 'commandline':
             self.target = Target(target)
             self.kit = Kit(kit, values)
+            self.sudo = sudo
         
     def run(self):
 
@@ -34,4 +35,4 @@ class Pipeline:
 
         # Finally upload and execute "bash pipeline.sh" with sudo if indicated on params / config
         self.target.upload(StringIO(pipeline), "pipeline.sh")
-        self.target.execute(f"bash pipeline.sh", sudo=True)
+        self.target.execute(f"bash pipeline.sh", sudo=self.sudo)
