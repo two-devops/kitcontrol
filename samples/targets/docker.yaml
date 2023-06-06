@@ -8,6 +8,6 @@ args:
   look_for_keys: false
   # key_filename: '/home/miquel/.ssh/id_rsa_kubernetes-unelink'
 sudo:
-  user: ikcontrol
+  user: root
   password: password
-  prompt: prompt
+  # prompt: "[sudo] password:"
