@@ -37,7 +37,7 @@ class System:
         try:
             with open(path + '/' + filename, 'w', encoding="utf-8") as file:
                 file.write(config_file)
-        except Exception as error:
+        except FileNotFoundError as error:
             print(f"Error: {error}")
 
     def search(self, value):

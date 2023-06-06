@@ -10,14 +10,14 @@ class Config:
     NAME_CONFIG_FILE = "config.yaml"
     PATH_CONFIG_FILE = ".kitcontrol/config.yaml"
 
-    KIT_CONTROL_CONFIG = { "default_config": [{
+    KIT_CONTROL_CONFIG = { "default_config": {
         "path_kits": "kits",
         "path_targets": "targets",
         "path_pipelines": "pipelines",
-        "path_config": ".kitcontrol" }],
-        "mode":[{
+        "path_config": ".kitcontrol" },
+        "mode":{
             "type": "normal",
-        }]
+        }
     }
 
     KIT_CONTROL_CONFIG_FILE = """---
@@ -69,8 +69,8 @@ class Config:
                 data = yaml.load(config_file, Loader=SafeLoader)
             except yaml.YAMLError as err:
                 echo(f"{err}")
-        kit = data["default_config"][0]["path_kits"]
-        target = data["default_config"][0]["path_targets"]
-        pipeline = data["default_config"][0]["path_pipelines"]
+        kit = data["default_config"]["path_kits"]
+        target = data["default_config"]["path_targets"]
+        pipeline = data["default_config"]["path_pipelines"]
 
         return kit, target, pipeline
