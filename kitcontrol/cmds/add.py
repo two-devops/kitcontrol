@@ -2,7 +2,7 @@ from click import echo, style
 
 from cmds.checks import Checks
 from cmds.system import System
-from cmds.config import Config
+from config.config import Config
 
 class Add:
     """Class to create: kits, targets and pipelines"""
@@ -15,19 +15,18 @@ class Add:
         self.entity = entity
         self.file = file
         self.config.check_config()
-        self.kits, self.targets, self.pipelines = self.config.load_config()
 
     def create(self):
         """create kits, targets and pipelines"""
         if self.entity == "kit":
-            self.check.check_if_exist(self.kits + "/" + self.file, "already exist")
-            self.system.mkdir(self.kits + "/" + self.file)
-            self.system.mkfile(self.kits + "/" + self.file, self.file+".yaml", self.config.KIT_CONFIG)
+            self.check.check_if_exist(self.config.kits_dir + "/" + self.file, "already exist")
+            self.system.mkdir(self.config.kits_dir + "/" + self.file)
+            self.system.mkfile(self.config.kits_dir + "/" + self.file, self.file+".yaml", self.config.load_config(self.config.config_kit))
         elif self.entity == "target":
-            self.check.check_if_exist(self.targets + "/" + self.file+".yaml", "already exist")
-            self.system.mkfile(self.targets+"/", self.file+".yaml", self.config.TARGET_CONFIG)
+            self.check.check_if_exist(self.config.targets_dir + "/" + self.file+".yaml", "already exist")
+            self.system.mkfile(self.config.targets_dir+"/", self.file+".yaml", self.config.load_config(self.config.config_target))
         else: 
-            self.check.check_if_exist(self.pipelines + "/" + self.file+".yaml", "already exist")
-            self.system.mkfile(self.pipelines + "/", self.file+".yaml", self.config.PIPELINE_CONFIG)
+            self.check.check_if_exist(self.config.pipelines_dir + "/" + self.file+".yaml", "already exist")
+            self.system.mkfile(self.config.pipelines_dir + "/", self.file+".yaml", self.config.load_config(self.config.config_pipeline))
 
         echo(style(f"Info: create {self.entity}: {self.file}.yaml", fg="green"))

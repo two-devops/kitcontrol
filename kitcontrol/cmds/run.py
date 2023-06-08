@@ -1,5 +1,7 @@
 from cmds.checks import Checks
-from cmds.config import Config
+
+from config.config import Config
+
 from core.pipeline import Pipeline
 
 class Run:
@@ -13,9 +15,8 @@ class Run:
         self.config = Config()
         self.check = Checks()
         self.config.check_config()
-        self.kits, self.targets, self.pipelines = self.config.load_config()
-        self.check.check_if_not_exist(self.kits + "/" + self.kit, "not found")
-        self.check.check_if_not_exist(self.targets + "/" + self.target+".yaml", "not found")
+        self.check.check_if_not_exist(self.config.kits_dir + "/" + self.kit, "not found")
+        self.check.check_if_not_exist(self.config.targets_dir + "/" + self.target + ".yaml", "not found")
 
     def run(self):
         """exec kits"""
