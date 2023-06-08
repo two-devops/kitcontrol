@@ -9,19 +9,23 @@ class Run:
 
     config = Config()
 
-    def __init__(self, kit, target, pipeline=None, sudo=None, system=System()):
+    def __init__(self, kit=None, target=None, pipeline=None, sudo=None, system=System()):
         self.kit = kit
         self.target = target
         self.pipeline = pipeline
         self.sudo = sudo
         self.system = system
         self.config.check_config()
-        self.check_exist_entities()
+        # self.check_exist_entities()
 
     def run(self):
         """exec kits"""
-        pipeline = Pipeline(kit=self.kit, target=self.target)
-        pipeline.run()
+        if self.pipeline:
+            pipeline = Pipeline(self.pipeline)
+            pipeline.start()
+        else: 
+            pipeline = Pipeline(kit=self.kit, target=self.target)
+            pipeline.run()
 
     def check_exist_entities(self):
         """Check exist"""

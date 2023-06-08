@@ -9,14 +9,36 @@ BASEPATH = 'pipelines'
 
 class Pipeline:
     def __init__(self, name='commandline', kit='', target='', sudo=False, values: object = {}):
+        
         # Use command params...
         if name == 'commandline':
             self.target = Target(target)
             self.kit = Kit(kit, values)
             self.sudo = sudo
         
-    def run(self):
+        else:
+            self.name = name
+            self.config = self._load_config()
+            self.sudo = self.config.get('sudo', False)
 
+    def _load_config(self):
+        return yaml.load(open(f"{BASEPATH}/{self.name}.yaml", "r"), Loader=yaml.loader.SafeLoader)
+
+
+    def start(self):
+
+        # Run every kit on every target...
+        for target in self.config['targets']:
+            self.target = Target(target)
+            
+            for kit in self.config['kits']:
+                self.kit = Kit(kit, self.config.get('values', None))
+
+                self.run()
+
+
+    def run(self):
+        
         pipeline = ""
 
         # Get all files from kit

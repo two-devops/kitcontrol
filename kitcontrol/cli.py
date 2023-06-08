@@ -16,8 +16,8 @@ def kitcontrol():
     pass
 
 @click.command(name="run")
-@click.option('-k', '--kit', required=True, help='Kit name')
-@click.option('-t', '--target', required=True, help='Target name')
+@click.option('-k', '--kit', help='Kit name')
+@click.option('-t', '--target', help='Target name')
 @click.option('-p', '--pipeline', help='Pipeline name')
 @click.option('-s', '--sudo', help='super user permisions')
 def run(kit, target, pipeline, sudo):
