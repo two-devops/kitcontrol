@@ -1,0 +1,36 @@
+name: Pipeline Hello Docker
+
+# Stages to define first phase -> ex install 2n phase -> join, etc...
+stages:
+  - install-masters:
+
+      # Process all kits on first target, after second.. (in order)
+      kits: 
+        - install-crio
+        - install-kubeadm
+
+      # Possibility of run-all at time (multi-threading)
+      # Log must be sequential!! what we see on console ?!
+      targets:
+        - master1
+        - master2
+        - master3
+
+      values:
+        worldof: 'Pipelines HelloDocker'
+
+      sudo: true
+
+  - join-nodes:
+
+      kits: 
+        - join-nodes
+
+      targets:
+        - docker
+
+      values:
+        worldof: 'Pipelines HelloDocker'
+
+      sudo: true
+
