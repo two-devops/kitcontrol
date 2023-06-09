@@ -8,7 +8,7 @@ class Run:
     """Class to exec kits, targets and pipelines"""
 
 
-    def __init__(self, kit=None, target=None, pipeline=None, sudo=None, system=System()):
+    def __init__(self, kit=None, target=None, pipeline=None, sudo=None):
         self.kit = kit
         self.target = target
         self.pipeline = pipeline

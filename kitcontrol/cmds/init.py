@@ -11,7 +11,7 @@ class Init:
     characters = "."
 
     def __init__(self, path=None):
-        self.path = path
+        self.path = path if path else "."
         self.system = System()
         self.config = Config()
         self.check = Checks()

@@ -18,7 +18,7 @@ def kitcontrol():
     pass
 
 @click.command(name="init")
-@click.argument("path")
+@click.argument("path", nargs=-1)
 def init(path):
     '''
     command to initialited kitcontrol application
