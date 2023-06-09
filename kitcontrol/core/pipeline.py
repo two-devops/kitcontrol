@@ -4,8 +4,9 @@ from .kit import Kit
 from .target import Target
 
 from io import StringIO
+from config.config import Config
 
-BASEPATH = 'pipelines'
+BASEPATH = Config.pipelines_dir
 
 class Pipeline:
     def __init__(self, name='commandline', kit='', target='', sudo=False, values: object = {}):

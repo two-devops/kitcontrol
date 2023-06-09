@@ -2,8 +2,9 @@ import yaml
 
 from .osinfo import OsInfo
 from .connection import FabricConnection
+from config.config import Config
 
-BASEPATH = 'targets'
+BASEPATH = Config.targets_dir
 
 class Target:
     def __init__(self, name, connection=FabricConnection()):

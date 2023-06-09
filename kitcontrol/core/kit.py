@@ -4,8 +4,9 @@ from jinja2 import Environment, FileSystemLoader
 from mergedeep import merge
 from os.path import exists
 from io import StringIO, BytesIO
+from config.config import Config
 
-BASEPATH = 'kits'
+BASEPATH = Config.kits_dir
 
 class Kit:
     def __init__(self, name, values={}):
