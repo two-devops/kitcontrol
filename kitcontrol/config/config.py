@@ -32,7 +32,7 @@ class Config:
     def __init__(self):
         self.check = Checks()
         self.system = System()
-        self.load_config = self._load_config()
+        self.config = self._load_config()
 
     def check_config(self):
         """checking if config file exist"""
