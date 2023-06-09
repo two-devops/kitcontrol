@@ -3,6 +3,7 @@ import os
 from click import echo, style
 
 from cmds.checks import Checks
+from cmds.system import System
 
 ROOT_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__)))
 KITS_DIR = "kits"
@@ -30,17 +31,28 @@ class Config:
 
     def __init__(self):
         self.check = Checks()
+        self.system = System()
+        self.load_config = self._load_config()
 
     def check_config(self):
         """checking if config file exist"""
         self.check.check_if_not_exist(self.path_config_file, f"\nInfo: There isn't a .kitconfig directory, the {self.path_config_file} not found\n")
+    
+    def _load_config(self):
+        """Load config from .kitcontrol/config.yaml file"""
+        if self.system.search(self.path_config_file):
+            with open(self.path_config_file, "r", encoding="utf8") as config_file:
+                try:
+                    data = config_file.read()
+                except FileNotFoundError as err:
+                    echo(style(f"Info: file {self.config_file_name} - {err}", bg="yellow"))
+            return data
 
-    def load_config(self, file):
-        """load .kitconfig/config.yaml"""
+    def load_default(self, file):
+        """load defaults configs"""
         with open(self.root_dir + file, "r", encoding="utf8") as config_file:
             try:
                 data = config_file.read()
             except FileNotFoundError as err:
                 echo(style(f"Info: file {self.config_file_name} - {err}", bg="yellow"))
-
         return data

@@ -2,7 +2,8 @@ from click import prompt, confirm, echo
 
 from cmds.checks import Checks
 from cmds.system import System
-from cmds.config import Config
+
+from config.config import Config
 
 
 class Wizard():
@@ -17,7 +18,7 @@ class Wizard():
         self.check = Checks()
         self.entity = entity
         self.config.check_config()
-        self.kits, self.targets, self.pipelines = self.config.load_config()
+        # self.kits, self.targets, self.pipelines = self.config.load_config()
         self.wizard()
         
        

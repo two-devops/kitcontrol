@@ -34,7 +34,7 @@ class Init:
 
                 if folder == self.config.config_folder:
                     path = self.path + "/" + folder
-                    self.system.mkfile(path, self.config.config_file_name, self.config.load_config(self.config.config_file_name))
+                    self.system.mkfile(path, self.config.config_file_name, self.config.load_default(self.config.config_file_name))
             else:
                 if not self.system.mkdir(folder):
                     echo(style("Error: unknown", fg="red"))
@@ -42,4 +42,4 @@ class Init:
                     echo(style(f"directory {folder} created", fg="green"))
 
                 if folder == self.config.config_folder:
-                    self.system.mkfile(self.config.config_folder, self.config.config_file_name, self.config.load_config(self.config.config_file_name))
+                    self.system.mkfile(self.config.config_folder, self.config.config_file_name, self.config.load_default(self.config.config_file_name))
