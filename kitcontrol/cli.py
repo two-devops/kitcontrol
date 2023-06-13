@@ -40,13 +40,13 @@ def run(kit, target, pipeline, sudo):
 
 @click.command(name="add")
 @click.argument('entity_name', type=click.Choice(ADD))
+@click.option('-w', '--wizard', is_flag=True, default=False, help='Interactive mode to create entitieys')
 @click.argument('name')
-def add(entity_name, name):
+def add(entity_name, name, wizard):
     '''
     command to adding entities: kits, targets or pipelines
     '''
-    acition = Add(entity_name, name)
-    acition.create()
+    Add(entity_name, name, wizard)
 
 @click.command(name="rm")
 @click.argument('entity_name', type=click.Choice(ADD))
@@ -68,17 +68,17 @@ def show(entity, edit):
     '''
     Show(entity, edit)
 
-@click.command(name="wizard")
-@click.argument("entity", type=click.Choice(ADD))
-def wizard(entity):
-    '''
-    command to show entities and edit
-    '''
-    Wizard(entity)
+# @click.command(name="wizard")
+# @click.argument("entity", type=click.Choice(ADD))
+# def wizard(entity):
+#     '''
+#     command to show entities and edit
+#     '''
+#     Wizard(entity)
 
 kitcontrol.add_command(init)
 kitcontrol.add_command(add)
 kitcontrol.add_command(run)
 kitcontrol.add_command(show)
 kitcontrol.add_command(rm)
-kitcontrol.add_command(wizard)
+# kitcontrol.add_command(wizard)
