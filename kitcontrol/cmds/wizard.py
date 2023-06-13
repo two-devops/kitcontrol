@@ -12,7 +12,6 @@ class Wizard():
     data = {}
 
     def __init__(self, entity):
-
         self.config = Config()
         self.system = System()
         self.check = Checks()
@@ -21,18 +20,16 @@ class Wizard():
         # self.kits, self.targets, self.pipelines = self.config.load_config()
         self.wizard()
         
-       
     def wizard(self):   
         """Create entities step by step"""
-        while True:
-            if self.entity == "kit":
-                self.data['name'] = prompt('Please enter name of kit')
-                self.data["files"] = prompt('Enter files names')
-                self.data["values"] = prompt('Enter key values for kti')
+        if self.entity == "target":
+            self.data["name"] = prompt('Please enter name of kit')
+            self.data["files"] = prompt('hostname or ip address')
+            self.data["values"] = prompt('Enter password', hide_input=True, confirmation_prompt=True)
 
-            if not confirm("Do you wan enter other kit"): 
-                echo("Save new kit")
-                break
-
-        print(self.data)
-
+        if confirm("Do you wan enter other kit"):
+            echo("Save new kit")
+            self.system.mkfile(self.config.targets_dir, self.entity + self.data["name"], self.data)
+            # print(self.data)
+        else:
+            print(f"{self.entity}", self.data["name"],"not saved")

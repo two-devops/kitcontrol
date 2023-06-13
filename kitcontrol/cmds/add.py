@@ -2,20 +2,26 @@ from click import echo, style
 
 from cmds.checks import Checks
 from cmds.system import System
+from cmds.wizard import Wizard
 
 from config.config import Config
 
 class Add:
     """Class to create: kits, targets and pipelines"""
 
-    def __init__(self, entity, file):
+    def __init__(self, entity, file, wizard=None):
 
         self.config = Config()
         self.system = System()
         self.check = Checks()
         self.entity = entity
         self.file = file
+        self.wizard = wizard
         self.config.check_config()
+        if self.wizard:
+            Wizard(entity)
+        else:
+            self.create()
 
     def create(self):
         """create kits, targets and pipelines"""
