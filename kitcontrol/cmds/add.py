@@ -19,7 +19,7 @@ class Add:
         self.wizard = wizard
         self.config.check_config()
         if self.wizard:
-            Wizard(entity)
+            Wizard(entity, file)
         else:
             self.create()
 
