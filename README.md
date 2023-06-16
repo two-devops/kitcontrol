@@ -1,4 +1,4 @@
-# ikcontrol
+# kitcontrol
 
 It is a tool to automatically install applications and services on remote targets
 
@@ -16,7 +16,7 @@ docker run -d \
   -e TZ=Etc/UTC \
   -e SUDO_ACCESS=true \
   -e PASSWORD_ACCESS=true \
-  -e USER_NAME=ikcontrol \
+  -e USER_NAME=kitcontrol \
   -e USER_PASSWORD=password \
   -p 2222:2222 \
   --restart unless-stopped \
@@ -24,5 +24,5 @@ docker run -d \
 ```
 
 ```bash
-ssh ikcontrol@localhost -p 2222
+ssh kitcontrol@localhost -p 2222
 ```
