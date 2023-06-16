@@ -9,11 +9,11 @@ mockito = "*"
 pytest = "*"
 pyyaml = "*"
 utils = "*"
-kitcontrol = {editable = true, path = "."}
 mergedeep = "*"
 fabric = "*"
 decorator = "*"
 jinja2 = "*"
+kitcontrol = {editable = true, path = "."}
 
 [dev-packages]
 
