@@ -20,7 +20,11 @@ class Init:
     def init_app(self):
         """Build folders"""
 
-        # Check if folder exist
+        # This "if" is because cli argument sent to us tuple when we are typing "kitcontrol init <argument>" 
+        if isinstance(self.path, tuple):
+            self.path = ''.join(self.path)
+
+        # Check if exist folder
         if self.path and self.path not in self.characters:
             self.check.check_if_exist(self.path, "already exist")
 

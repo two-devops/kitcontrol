@@ -32,13 +32,13 @@ class Config:
     def __init__(self):
         self.check = Checks()
         self.system = System()
-        self.config = self._load_config()
+        self.config = self.__load_config()
 
     def check_config(self):
         """checking if config file exist"""
         self.check.check_if_not_exist(self.path_config_file, f"\nInfo: There isn't a .kitconfig directory, the {self.path_config_file} not found\n")
     
-    def _load_config(self):
+    def __load_config(self):
         """Load config from .kitcontrol/config.yaml file"""
         if self.system.search(self.path_config_file):
             with open(self.path_config_file, "r", encoding="utf8") as config_file:
