@@ -28,8 +28,13 @@ class Wizard():
         
     def wizard(self):   
         """Create entities step by step"""
-        print(self.target["args"]["password"])
+        if self.entity == "kit":
+            directory = self.config.kits_dir
+            self.data = self.kit
+            self.data["name"] = prompt('Name', default=self.file)
+
         if self.entity == "target":
+            directory = self.config.targets_dir
             self.data = self.target
             self.data["name"] = prompt('Name', default=self.file)
             self.data["host"] = prompt('Hostname or ip address', default="127.0.0.1")
@@ -39,16 +44,21 @@ class Wizard():
             self.data["args"]["allow_agent"] = prompt('Allow Agent', default=False)
             self.data["args"]["look_for_keys"] = prompt('Look for Keys', default=False)
 
+        if self.entity == "pipeline":
+            directory = self.config.pipelines_dir
+            self.data = self.pipeline
+            self.data["name"] = prompt('Name', default=self.file)
+
         if confirm(f"Do you want save {self.data['name']}?"):
             data = yaml.dump(self.data, default_flow_style=False)
-            if self.entity == "target":
-                self.check.check_if_exist(self.config.targets_dir + "/" + self.data["name"]+".yaml", "already exist, try again with other name")
-                self.system.mkfile(self.config.targets_dir, self.data["name"]+'.yaml', data)
             if self.entity == "kit":
-                self.system.mkfile(self.config.kits_dir, self.data["name"]+'.yaml', data)
-            if self.entity == "pipeline":
-                self.system.mkfile(self.config.pipelines_dir, self.data["name"]+'.yaml', data)
-            echo(f"Save {self.data['name']}")
+                self.check.check_if_exist(directory + "/" + self.data["name"] + "/" + self.data["name"]+".yaml", "already exist, try again with other name")
+                self.system.mkdir(directory + "/" + self.data["name"])
+                self.system.mkfile(directory + "/" + self.data["name"], self.data["name"]+'.yaml', data)
+            else: 
+                self.check.check_if_exist(directory + "/" + self.data["name"]+".yaml", "already exist, try again with other name")
+                self.system.mkfile(directory, self.data["name"]+'.yaml', data)
+            echo(f"The {self.entity} {self.data['name']} saved correctly")
         else:
             echo(f"{self.entity} {self.data['name']} not saved")
     
