@@ -1,0 +1,10 @@
+---
+name: "Docker openssh-server"
+host: localhost
+user: ikcontrol
+port: 2222
+args:
+    password: password
+    allow_agent: false
+    look_for_keys: false
+#   key_filename: '/home/miquel/.ssh/id_rsa_kubernetes-unelink'"""

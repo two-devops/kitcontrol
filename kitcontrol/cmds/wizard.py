@@ -13,6 +13,7 @@ class Wizard():
     """Interactive creation entities"""
 
     data = {}
+    cp = {}
 
     def __init__(self, entity, file):
         self.config = Config()
@@ -31,7 +32,42 @@ class Wizard():
         if self.entity == "kit":
             directory = self.config.kits_dir
             self.data = self.kit
+            print(self.data)
             self.data["name"] = prompt('Name', default=self.file)
+
+            # clear list and dicts
+            self.data["files"].clear()
+            self.data["values"].clear()
+
+            count = 0
+            while True:
+                self.data["files"].append(prompt('Enter file name'))
+                print(self.data["files"])
+                path_file = prompt('Enter path where are the file')
+                file = self.data["files"][count]
+                path_from = path_file + '/' + file
+                path_to = self.config.kits_dir + '/' + self.file
+                print(path_from, path_to)
+                count =+1
+                
+
+                if confirm("Do you want enter another file?"):
+                    continue
+                else:
+                    break
+
+            print()
+            if confirm("Do you want enter values?"):
+                while True:
+                        key = prompt("Enter name key") 
+                        value = prompt("Enter name value")
+                        self.data["values"][key] = value
+                        print(self.data["values"])
+                        if confirm("Do you want enter another value?"):
+                            continue
+                        else:
+                            break
+            print(self.data)
 
         if self.entity == "target":
             directory = self.config.targets_dir
@@ -47,14 +83,53 @@ class Wizard():
         if self.entity == "pipeline":
             directory = self.config.pipelines_dir
             self.data = self.pipeline
+            print(self.data)
             self.data["name"] = prompt('Name', default=self.file)
 
+            # clear list and dicts
+            self.data["kits"].clear()
+            self.data["targets"].clear()
+            self.data["values"].clear()
+
+            while True:
+                self.data["kits"].append(prompt('Enter kit name'))
+                print(self.data["kits"])
+                if confirm("Do you want enter another kit?"):
+                    continue
+                else:
+                    break
+
+            print()
+            while True:
+                self.data["targets"].append(prompt('Enter target name'))
+                print(self.data["targets"])
+                if confirm("Do you want enter another target?"):
+                    continue
+                else:
+                    break
+
+            print()
+            if confirm("Do you want enter values?"):
+                while True:
+                        key = prompt("Enter name key") 
+                        value = prompt("Enter name value")
+                        self.data["values"][key] = value
+                        print(self.data["values"])
+                        if confirm("Do you want enter another value?"):
+                            continue
+                        else:
+                            break
+
+            print(self.data)
+
+        print()
         if confirm(f"Do you want save {self.data['name']}?"):
-            data = yaml.dump(self.data, default_flow_style=False)
+            data = yaml.dump(self.data, sort_keys=False)
             if self.entity == "kit":
                 self.check.check_if_exist(directory + "/" + self.data["name"] + "/" + self.data["name"]+".yaml", "already exist, try again with other name")
                 self.system.mkdir(directory + "/" + self.data["name"])
                 self.system.mkfile(directory + "/" + self.data["name"], self.data["name"]+'.yaml', data)
+                self.system.cp(path_from, path_to)
             else: 
                 self.check.check_if_exist(directory + "/" + self.data["name"]+".yaml", "already exist, try again with other name")
                 self.system.mkfile(directory, self.data["name"]+'.yaml', data)
