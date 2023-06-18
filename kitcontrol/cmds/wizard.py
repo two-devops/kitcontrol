@@ -43,7 +43,7 @@ class Wizard():
             while True:
                 self.data["files"].append(prompt('Enter file name'))
                 print(self.data["files"])
-                path_file = prompt('Enter path where are the file')
+                path_file = prompt('Enter file path')
                 file = self.data["files"][count]
                 path_from = path_file + '/' + file
                 path_to = self.config.kits_dir + '/' + self.file
