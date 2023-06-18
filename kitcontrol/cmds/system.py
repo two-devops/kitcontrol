@@ -28,6 +28,14 @@ class System:
         except FileNotFoundError as err:
             print(err)
 
+    def cp(self, path_from, path_to):
+        """ copy file in place"""
+        try:
+            process = run(["cp", "-rv", path_from, path_to], check=True, stdout=PIPE, universal_newlines=True, timeout=30)
+            return process.stdout
+        except FileNotFoundError as err:
+            print(err)
+
     def mkfile(self, path, filename, data=None):
         """ Create files"""
         if data:

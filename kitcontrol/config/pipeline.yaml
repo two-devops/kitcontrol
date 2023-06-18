@@ -1,2 +1,13 @@
 ---
-name: "pipeline"
+name: Pipeline Hello Docker
+
+kits: 
+  - helloworld
+
+targets:
+  - docker
+
+values:
+  worldof: 'Pipelines HelloDocker'
+
+sudo: true

@@ -40,13 +40,13 @@ def run(kit, target, pipeline, sudo):
 
 @click.command(name="add")
 @click.argument('entity_name', type=click.Choice(ADD))
-@click.option('-w', '--wizard', is_flag=True, default=False, help='Interactive mode to create entitieys')
+@click.option('-i', '--interactive', is_flag=True, default=False, help='Interactive mode to create entitieys')
 @click.argument('name')
-def add(entity_name, name, wizard):
+def add(entity_name, name, interactive):
     '''
     command to adding entities: kits, targets or pipelines
     '''
-    Add(entity_name, name, wizard)
+    Add(entity_name, name, interactive)
 
 @click.command(name="rm")
 @click.argument('entity_name', type=click.Choice(ADD))
@@ -58,7 +58,6 @@ def rm(entity_name, name):
     action = Remove(entity_name, name)
     action.remove()
     
-
 @click.command(name="show")
 @click.option("-e", "--edit",help="edit kits, target or pipelines")
 @click.argument("entity", type=click.Choice(SHOW))
