@@ -7,34 +7,21 @@ class System:
 
     def mkdir(self, path):
         """ Create fields"""
-        try:
-            return run(["mkdir", "-p", path], capture_output=True, text=True, check=True, timeout=30)
-        except FileExistsError as err:
-            print(err)
+        return run(["mkdir", "-p", path], capture_output=True, text=True, check=True, timeout=30)
 
     def ls(self, entity):
         """ Show fields and files"""
-        try:
-            process = run(["ls", "-1", entity], check=True, stdout=PIPE, universal_newlines=True, timeout=30)
-            return process.stdout
-        except FileNotFoundError as err:
-            print(err)
+        process = run(["ls", "-1", entity], check=True, stdout=PIPE, universal_newlines=True, timeout=30)
+        return process.stdout
 
     def rm(self, entity):
         """ remove fields and files"""
-        try:
-            process = run(["rm", "-rf", entity], check=True, stdout=PIPE, universal_newlines=True, timeout=30)
-            return process.stdout
-        except FileNotFoundError as err:
-            print(err)
+        process = run(["rm", "-rf", entity], check=True, stdout=PIPE, universal_newlines=True, timeout=30)
+        return process.stdout
 
-    def cp(self, path_from, path_to):
+    def cp(self, src_path, dst_path):
         """ copy file in place"""
-        try:
-            process = run(["cp", "-rv", path_from, path_to], check=True, stdout=PIPE, universal_newlines=True, timeout=30)
-            return process.stdout
-        except FileNotFoundError as err:
-            print(err)
+        return run([f'cp -r {src_path} {dst_path}'], shell=True, check=True)
 
     def mkfile(self, path, filename, data=None):
         """ Create files"""
