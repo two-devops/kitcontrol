@@ -24,13 +24,13 @@ class Show:
     def show_entity(self):
         """show kits, targets and pipelines"""
         if self.entity == "kits":
-            values = self.system.ls(self.config.kits_dir)
+            values = self.system.command('ls -1 ' + self.config.kits_dir)
         elif self.entity == "targets":
-            values = self.system.ls(self.config.targets_dir)
+            values = self.system.command('ls -1 ' + self.config.targets_dir)
         else:
-            values = self.system.ls(self.config.pipelines_dir)
+            values = self.system.command('ls -1 ' + self.config.pipelines_dir)
         echo(style(f"\n{self.entity}\n", fg="blue"))
-        echo(style(f'{values}', fg='green', italic=True))
+        echo(style(f'{values.stdout}', fg='green', italic=True))
 
     def edit_entity(self):
         """edit kits, targets or pipelines"""
