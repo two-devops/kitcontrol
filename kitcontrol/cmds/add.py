@@ -27,7 +27,7 @@ class Add:
         """create kits, targets and pipelines"""
         if self.entity == "kit":
             self.check.check_if_exist(self.config.kits_dir + "/" + self.file, "already exist")
-            self.system.mkdir(self.config.kits_dir + "/" + self.file)
+            self.system.command('mkdir -p ' + self.config.kits_dir + "/" + self.file)
             self.system.mkfile(self.config.kits_dir + "/" + self.file, self.file+".yaml", self.config.load_default(self.config.config_kit))
         elif self.entity == "target":
             self.check.check_if_exist(self.config.targets_dir + "/" + self.file+".yaml", "already exist")

@@ -31,7 +31,7 @@ class Init:
         # Create folders and config file
         for folder in self.folders:
             if self.path != self.characters:
-                if not self.system.mkdir(self.path + '/' + folder):
+                if not self.system.command('mkdir -p ' + self.path + '/' + folder):
                     echo(style("Error: unknown", fg="red"))
                 else:
                     echo(style(f"directory {self.path}/{folder} created", fg="green"))
@@ -40,7 +40,7 @@ class Init:
                     path = self.path + "/" + folder
                     self.system.mkfile(path, self.config.config_file_name, self.config.load_default(self.config.config_file_name))
             else:
-                if not self.system.mkdir(folder):
+                if not self.system.command('mkdir -p ' + folder):
                     echo(style("Error: unknown", fg="red"))
                 else:
                     echo(style(f"directory {folder} created", fg="green"))

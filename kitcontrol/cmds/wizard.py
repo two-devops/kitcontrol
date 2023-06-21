@@ -127,9 +127,9 @@ class Wizard():
             data = yaml.dump(self.data, sort_keys=False)
             if self.entity == "kit":
                 self.check.check_if_exist(directory + "/" + self.data["name"] + "/" + self.data["name"]+".yaml", "already exist, try again with other name")
-                self.system.mkdir(directory + "/" + self.data["name"])
+                self.system.command('mkdir -p ' + directory + "/" + self.data["name"])
                 self.system.mkfile(directory + "/" + self.data["name"], self.data["name"]+'.yaml', data)
-                self.system.cp(path_from, path_to)
+                self.system.command('cp -r ' + path_from + ' ' + path_to)
             else: 
                 self.check.check_if_exist(directory + "/" + self.data["name"]+".yaml", "already exist, try again with other name")
                 self.system.mkfile(directory, self.data["name"]+'.yaml', data)
