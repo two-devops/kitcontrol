@@ -33,7 +33,7 @@ class Wizard():
             directory = self.config.kits_dir
             self.data = self.kit
             print(self.data)
-            self.data["name"] = prompt('Name', default=self.file)
+            self.data["name"] = self.file
 
             # clear list and dicts
             self.data["files"].clear()
@@ -49,7 +49,6 @@ class Wizard():
                 path_to = self.config.kits_dir + '/' + self.file
                 print(path_from, path_to)
                 count =+1
-                
 
                 if confirm("Do you want enter another file?"):
                     continue
@@ -60,8 +59,7 @@ class Wizard():
             if confirm("Do you want enter values?"):
                 while True:
                         key = prompt("Enter name key") 
-                        value = prompt("Enter name value")
-                        self.data["values"][key] = value
+                        self.data["values"][key] = prompt("Enter name value")
                         print(self.data["values"])
                         if confirm("Do you want enter another value?"):
                             continue
