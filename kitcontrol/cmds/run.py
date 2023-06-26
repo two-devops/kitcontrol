@@ -1,4 +1,7 @@
+from click import prompt, confirm, echo, style
+
 from cmds.checks import Checks
+from cmds.show import Show
 
 from config.config import Config
 
@@ -17,11 +20,21 @@ class Run:
         self.check = Checks()
         self.config.check_config()
 
+    def __checks(self):
+        """check entities"""
         if self.kit:
             self.check.check_if_not_exist(self.config.kits_dir + "/" + self.kit, "not found")
         if self.target:
             self.check.check_if_not_exist(self.config.targets_dir + "/" + self.target + ".yaml", "not found")
 
+    def run_interactive(self):
+        """interactive run"""
+        Show('kits').show_entity()
+        self.kit = prompt('Enter kit')
+        Show('targets').show_entity()
+        self.target = prompt('Enter target')
+        self.__checks()
+        self.run()
 
     def run(self):
         """exec kits"""
@@ -30,5 +43,6 @@ class Run:
             pipeline.start()
         else: 
             pipeline = Pipeline(kit=self.kit, target=self.target)
+            self.__checks()
             pipeline.run()
 
