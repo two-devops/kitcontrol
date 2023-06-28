@@ -42,7 +42,6 @@ class Run:
             pipeline = Pipeline(self.pipeline)
             pipeline.start()
         else: 
-            pipeline = Pipeline(kit=self.kit, target=self.target)
             self.__checks()
+            pipeline = Pipeline(kit=self.kit, target=self.target)
             pipeline.run()
-
