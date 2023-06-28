@@ -30,12 +30,17 @@ def init(path):
 @click.option('-k', '--kit', help='Kit name')
 @click.option('-t', '--target', help='Target name')
 @click.option('-p', '--pipeline', help='Pipeline name')
-@click.option('-s', '--sudo', is_flag=True, default=False, help='super user permisions')
-@click.option('-i', '--interactive', is_flag=True, default=False, help='Interactive mode to running kits')
+@click.option('-s', '--sudo', is_flag=True, default=False, show_default=True, help='super user permisions')
+@click.option('-i', '--interactive', is_flag=True, default=False, show_default=True, help='Interactive mode to running kits')
 def run(kit, target, pipeline, sudo, interactive):
     '''
     command to execute kits
     '''
+    if not kit and not target and not pipeline and not sudo and not interactive:
+        ctx = click.get_current_context()
+        click.echo(ctx.get_help())
+        ctx.exit()
+ 
     action = Run(kit, target, pipeline, sudo)
 
     if not interactive:
