@@ -26,6 +26,8 @@ class Run:
             self.check.check_if_not_exist(self.config.kits_dir + "/" + self.kit, "not found")
         if self.target:
             self.check.check_if_not_exist(self.config.targets_dir + "/" + self.target + ".yaml", "not found")
+        if self.pipeline:
+            self.check.check_if_not_exist(self.config.pipelines_dir + "/" + self.pipeline + ".yaml", "not found")
 
     def run_interactive(self):
         """interactive run"""
@@ -39,6 +41,7 @@ class Run:
     def run(self):
         """exec kits"""
         if self.pipeline:
+            self.__checks()
             pipeline = Pipeline(self.pipeline)
             pipeline.start()
         else: 
