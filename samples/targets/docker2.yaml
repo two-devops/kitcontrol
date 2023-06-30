@@ -1,0 +1,15 @@
+name: "Docker openssh-server"
+host: localhost
+user: ikcontrol
+port: 22222
+args:
+  password: password
+  allow_agent: false
+  look_for_keys: false
+  # key_filename: '/home/miquel/.ssh/id_rsa_kubernetes-unelink'
+sudo:
+  user: root
+  password: password
+  # prompt: "[sudo] password:"
+values:
+  greeting: I'm the other docker target ;D

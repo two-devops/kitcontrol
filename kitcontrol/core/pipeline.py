@@ -4,6 +4,7 @@ from .kit import Kit
 from .target import Target
 
 from io import StringIO
+from mergedeep import merge
 from config.config import Config
 
 BASEPATH = Config.pipelines_dir
@@ -14,7 +15,9 @@ class Pipeline:
         # Use command params...
         if name == 'commandline':
             self.target = Target(target)
-            self.kit = Kit(kit, values)
+            # self.kit = Kit(kit, values)
+            targetValues = self.target.config.get('values', {})
+            self.kit = Kit(kit, merge(targetValues, values))
             self.sudo = sudo
         
         else:
@@ -33,7 +36,12 @@ class Pipeline:
             self.target = Target(target)
             
             for kit in self.config['kits']:
-                self.kit = Kit(kit, self.config.get('values', None))
+
+                # Values treatment
+                targetValues = self.target.config.get('values', {})
+                pipelineValues = self.config['values'].get(target, {})
+
+                self.kit = Kit(kit, merge(targetValues, pipelineValues))
 
                 self.run()
 

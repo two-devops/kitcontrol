@@ -26,3 +26,22 @@ docker run -d \
 ```bash
 ssh kitcontrol@localhost -p 2222
 ```
+
+```bash
+docker run -d \
+  --name=openssh-server2 \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Etc/UTC \
+  -e SUDO_ACCESS=true \
+  -e PASSWORD_ACCESS=true \
+  -e USER_NAME=kitcontrol \
+  -e USER_PASSWORD=password \
+  -p 22222:2222 \
+  --restart unless-stopped \
+  lscr.io/linuxserver/openssh-server:latest
+```
+
+```bash
+ssh kitcontrol@localhost -p 22222
+```

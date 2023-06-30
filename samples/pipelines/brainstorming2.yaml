@@ -1,0 +1,29 @@
+name: Complete Pipeline
+
+kits:
+
+  - helloworld:
+      values:
+        worldof: "Two-devops"
+
+  - greetings:
+      values:
+        greeting: "Hello from the other side"
+
+targets:
+
+  - target1:
+
+      values:
+
+        helloworld:
+          worldof: "Target1"
+        
+        greetings:
+          greeting: "Hi, I'm target1"
+
+  - target2:
+
+      values:
+        worldof: "Target2"
+        greeting: "Hi, I'm target2"
