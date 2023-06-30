@@ -4,7 +4,6 @@ from cmds.init import Init
 from cmds.add import Add
 from cmds.run import Run
 from cmds.show import Show
-from cmds.wizard import Wizard
 from cmds.remove import Remove
 
 ADD = ["kit", "target", "pipeline"]
@@ -30,23 +29,32 @@ def init(path):
 @click.option('-k', '--kit', help='Kit name')
 @click.option('-t', '--target', help='Target name')
 @click.option('-p', '--pipeline', help='Pipeline name')
-@click.option('-s', '--sudo', help='super user permisions')
-def run(kit, target, pipeline, sudo):
+@click.option('-s', '--sudo', is_flag=True, default=False, show_default=True, help='super user permisions')
+@click.option('-i', '--interactive', is_flag=True, default=False, show_default=True, help='Interactive mode to running kits')
+def run(kit, target, pipeline, sudo, interactive):
     '''
     command to execute kits
     '''
+    if not kit and not target and not pipeline and not sudo and not interactive:
+        ctx = click.get_current_context()
+        click.echo(ctx.get_help())
+        ctx.exit()
+ 
     action = Run(kit, target, pipeline, sudo)
-    action.run()
+
+    if not interactive:
+        action.run()
+    else:
+        action.run_interactive()
 
 @click.command(name="add")
 @click.argument('entity_name', type=click.Choice(ADD))
-@click.option('-w', '--wizard', is_flag=True, default=False, help='Interactive mode to create entitieys')
 @click.argument('name')
-def add(entity_name, name, wizard):
+def add(entity_name, name):
     '''
     command to adding entities: kits, targets or pipelines
     '''
-    Add(entity_name, name, wizard)
+    Add(entity_name, name)
 
 @click.command(name="rm")
 @click.argument('entity_name', type=click.Choice(ADD))
@@ -58,27 +66,18 @@ def rm(entity_name, name):
     action = Remove(entity_name, name)
     action.remove()
     
-
 @click.command(name="show")
-@click.option("-e", "--edit",help="edit kits, target or pipelines")
+# @click.option("-e", "--edit",help="edit kits, target or pipelines")
 @click.argument("entity", type=click.Choice(SHOW))
-def show(entity, edit):
+def show(entity):
     '''
     command to show entities and edit
     '''
-    Show(entity, edit)
-
-# @click.command(name="wizard")
-# @click.argument("entity", type=click.Choice(ADD))
-# def wizard(entity):
-#     '''
-#     command to show entities and edit
-#     '''
-#     Wizard(entity)
+    get = Show(entity)
+    get.show_entity()
 
 kitcontrol.add_command(init)
 kitcontrol.add_command(add)
 kitcontrol.add_command(run)
 kitcontrol.add_command(show)
 kitcontrol.add_command(rm)
-# kitcontrol.add_command(wizard)

@@ -1,0 +1,20 @@
+---
+!!map {
+  ? !!str "args"
+  : !!map {
+    ? !!str "allow_agent"
+    : !!bool "false",
+    ? !!str "look_for_keys"
+    : !!bool "false",
+    ? !!str "password"
+    : !!str "123",
+  },
+  ? !!str "host"
+  : !!str "127.0.0.1",
+  ? !!str "name"
+  : !!str "test33344",
+  ? !!str "port"
+  : !!int "22",
+  ? !!str "user"
+  : !!str "user",
+}
