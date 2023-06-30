@@ -39,8 +39,8 @@ class Pipeline:
 
                 # Values treatment
                 targetValues = self.target.config.get('values', {})
-                pipelineValues = self.config['values'].get(target, {})
-
+                pipelineValues = self.config['values'].get(target, {}).get(kit, {})
+                
                 self.kit = Kit(kit, merge(targetValues, pipelineValues))
 
                 self.run()

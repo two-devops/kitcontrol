@@ -8,7 +8,13 @@ targets:
   - docker2
 
 values:
-  docker2:
-    greeting: 'Hi from the pipeline!'
+
+  # Target first, kits values inside
+  docker1:
+    welcome:
+      greeting: Hi from the pipeline!
+
+    helloworld:
+      worldof: Pipeline
 
 sudo: true

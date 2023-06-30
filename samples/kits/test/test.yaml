@@ -52,3 +52,20 @@ data:
   '[add-sudoers.py]':
     # Second-level (key with file name)
     worldof: "World of python"
+
+  "@file:install-key.sh":
+     worldof: World of python with redirect ;)
+
+  file->install-key.sh:
+    value: worls -> al lor 
+  
+  file@install-key.sh:
+    value: pepepe
+
+  [file:install-key.sh]:
+
+    worldof: Python devops
+
+
+
+    

@@ -1,6 +1,6 @@
 name: "Docker openssh-server"
 host: localhost
-user: ikcontrol
+user: kitcontrol
 port: 2222
 args:
   password: password
