@@ -1,0 +1,42 @@
+name: Complete Pipeline
+
+kits:
+  - kit1
+  - kit2
+
+targets:
+  - target1
+  - target2
+
+values:
+
+  kit1:
+    
+    target1:
+      
+      customer: Cepsa
+      collector: colect.ew
+      port: 69000
+
+    target2:
+      
+      customer: Cepsa
+      collector: colect.ew
+      port: 69000
+
+  kit2:
+
+    target1:
+      greeting: "Hey Guy!"
+    
+    target2:
+      greeting: "Guey dude!"
+
+
+  # kit1-target1:
+
+  # - "kit1.target1":
+  #     worldof: "Target 1"
+
+  # - "kit1.target2":
+  #     worldof: "Target 2"

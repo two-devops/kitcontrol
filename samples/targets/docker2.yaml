@@ -1,7 +1,7 @@
 name: "Docker openssh-server"
 host: localhost
 user: kitcontrol
-port: 2222
+port: 22222
 args:
   password: password
   allow_agent: false
@@ -11,3 +11,5 @@ sudo:
   user: root
   password: password
   # prompt: "[sudo] password:"
+values:
+  greeting: Hi from the other docker target ;D

@@ -1,0 +1,7 @@
+name: "Welcome kit"
+
+files: 
+  - welcome.sh
+
+values: 
+  greeting: Hello from welcome kit :D

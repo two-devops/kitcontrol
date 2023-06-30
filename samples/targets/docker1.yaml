@@ -11,3 +11,5 @@ sudo:
   user: root
   password: password
   # prompt: "[sudo] password:"
+values:
+  greeting: Hi from the docker1 target!

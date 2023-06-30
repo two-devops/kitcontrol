@@ -17,7 +17,7 @@ class Kit:
         self.config = self._load_config()
 
         # Merge values
-        self.data = merge(self.config['data'], values)
+        self.values = merge(self.config['values'], values)
 
         # Set jinja2 environment (templates dir)
         self.env = Environment(loader=FileSystemLoader(f"{BASEPATH}/{self.name}/"))
@@ -40,9 +40,9 @@ class Kit:
             template = self.env.get_template(filename)
             
             # Add to dict files
-            data = merge(self.data, {"osInfo": osInfo}) if osInfo else self.data
-            # files[filename] = StringIO(template.render(data))
+            values = merge(self.values, {"osInfo": osInfo}) if osInfo else self.values
+            # files[filename] = StringIO(template.render(values))
             # BytesIO to support emojis ;D
-            files[filename] = BytesIO(template.render(data).encode('utf-8'))
+            files[filename] = BytesIO(template.render(values).encode('utf-8'))
 
         return files

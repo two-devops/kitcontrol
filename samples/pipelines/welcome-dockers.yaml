@@ -1,0 +1,20 @@
+name: Pipeline Welcome Dockers
+
+kits: 
+  - welcome
+
+targets:
+  - docker1
+  - docker2
+
+values:
+
+  # Target first, kits values inside
+  docker1:
+    welcome:
+      greeting: Hi from the pipeline!
+
+    helloworld:
+      worldof: Pipeline
+
+sudo: true

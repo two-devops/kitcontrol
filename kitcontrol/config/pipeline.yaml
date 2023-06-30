@@ -1,13 +1,20 @@
 ---
 name: Pipeline Hello Docker
 
+# Kits to execute
 kits: 
   - helloworld
 
+# Targets to run the kits
 targets:
   - docker
 
+# Values of each target-kits
 values:
-  worldof: 'Pipelines HelloDocker'
+
+  # Target first-level key, kits values inside
+  docker:
+    helloworld:
+      worldof: Pipeline values
 
 sudo: true
