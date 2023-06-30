@@ -22,9 +22,11 @@ class Remove():
         if self.entity == "kit":
             self.check.check_if_not_exist(self.config.kits_dir + "/" + self.file, "not found")
             self.system.command('rm -rf ' + self.config.kits_dir + "/" + self.file)
+            
         elif self.entity == "target":
             self.check.check_if_not_exist(self.config.targets_dir + "/" + self.file + ".yaml", "not found")
             self.system.command('rm -rf ' + self.config.targets_dir + "/" + self.file + ".yaml")
+
         else:
             self.check.check_if_not_exist(self.config.pipelines_dir + "/" + self.file + ".yaml", "not found")
             self.system.command('rm -rf ' + self.config.pipelines_dir + "/" + self.file + ".yaml")

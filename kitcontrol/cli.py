@@ -4,7 +4,6 @@ from cmds.init import Init
 from cmds.add import Add
 from cmds.run import Run
 from cmds.show import Show
-from cmds.wizard import Wizard
 from cmds.remove import Remove
 
 ADD = ["kit", "target", "pipeline"]
