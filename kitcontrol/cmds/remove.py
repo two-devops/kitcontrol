@@ -21,12 +21,14 @@ class Remove():
         """remove fields and files"""
         if self.entity == "kit":
             self.check.check_if_not_exist(self.config.kits_dir + "/" + self.file, "not found")
-            self.system.rm(self.config.kits_dir + "/" + self.file)
+            self.system.command('rm -rf ' + self.config.kits_dir + "/" + self.file)
+            
         elif self.entity == "target":
             self.check.check_if_not_exist(self.config.targets_dir + "/" + self.file + ".yaml", "not found")
-            self.system.rm(self.config.targets_dir + "/" + self.file + ".yaml")
+            self.system.command('rm -rf ' + self.config.targets_dir + "/" + self.file + ".yaml")
+
         else:
             self.check.check_if_not_exist(self.config.pipelines_dir + "/" + self.file + ".yaml", "not found")
-            self.system.rm(self.config.pipelines_dir + "/" + self.file + ".yaml")
+            self.system.command('rm -rf ' + self.config.pipelines_dir + "/" + self.file + ".yaml")
 
         echo(style(f"Info: {self.file}.yaml removed", fg="green"))

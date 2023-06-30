@@ -8,3 +8,7 @@ args:
     allow_agent: false
     look_for_keys: false
 #   key_filename: '/home/miquel/.ssh/id_rsa_kubernetes-unelink'"""
+
+# valores por defecto de target que sobrescribe los values del kit
+# values:
+#     port: 23
