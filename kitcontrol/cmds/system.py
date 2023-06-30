@@ -27,7 +27,3 @@ class System:
             return True
         else:
             return False
-
-    def edit(self, file):
-        """Edit file"""
-        edit(filename=file)

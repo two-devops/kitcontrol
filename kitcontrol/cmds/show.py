@@ -24,5 +24,6 @@ class Show:
             values = self.system.command('ls -1 ' + self.config.targets_dir)
         else:
             values = self.system.command('ls -1 ' + self.config.pipelines_dir)
+
         echo(style(f"\n{self.entity}\n", fg="blue"))
         echo(style(f'{values.stdout}', fg='green', italic=True))
