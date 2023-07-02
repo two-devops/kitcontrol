@@ -63,21 +63,30 @@ def rm(entity_name, name):
     '''
     command to remove entities: kits, targets or pipelines
     '''
-    action = Remove(entity_name, name)
-    action.remove()
+    Remove(entity_name, name).remove()
     
 @click.command(name="show")
-# @click.option("-e", "--edit",help="edit kits, target or pipelines")
 @click.argument("entity", type=click.Choice(SHOW))
 def show(entity):
     '''
     command to show entities and edit
     '''
-    get = Show(entity)
-    get.show_entity()
+    Show(entity).show_entity()
+
+@click.command(name="secrets")
+@click.option("-c","--create", help="Add new secret to target")
+@click.option("-l","--list", help="List secrets")
+@click.option("-u","--update", help="Update secret")
+@click.option("-r","--remove", help="Remove secret")
+def secrets(create, list, update, remove):
+    '''
+    command to management secrets
+    '''
+    pass
 
 kitcontrol.add_command(init)
 kitcontrol.add_command(add)
 kitcontrol.add_command(run)
 kitcontrol.add_command(show)
 kitcontrol.add_command(rm)
+kitcontrol.add_command(secrets)
