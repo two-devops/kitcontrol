@@ -8,6 +8,13 @@ setup(
     packages=find_packages("kitcontrol"),
     install_requires=[
         'Click',
+        'Mockito',
+        'pyyaml',
+        'utils',
+        'mergedeep',
+        'fabric',
+        'decorator',
+        'jinja2'
     ],
     entry_points={
         'console_scripts': [
