@@ -1,4 +1,3 @@
-from click import edit
 from subprocess import run, PIPE
 from os.path import exists
 

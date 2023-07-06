@@ -4,6 +4,7 @@ from cmds.init import Init
 from cmds.add import Add
 from cmds.run import Run
 from cmds.show import Show
+from cmds.secrets import Secrets
 from cmds.remove import Remove
 
 ADD = ["kit", "target", "pipeline"]
@@ -82,7 +83,7 @@ def secrets(create, list, update, remove):
     '''
     command to management secrets
     '''
-    pass
+    Secrets()
 
 kitcontrol.add_command(init)
 kitcontrol.add_command(add)
