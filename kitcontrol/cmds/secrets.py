@@ -16,7 +16,6 @@ class Secrets:
         self.config = Config()
         self.system = System()
         self.config.check_config()
-        self.create()
 
     def __checks(self, target):
         """Check targets"""

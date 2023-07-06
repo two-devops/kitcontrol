@@ -75,15 +75,15 @@ def show(entity):
     Show(entity).show_entity()
 
 @click.command(name="secrets")
-@click.option("-c","--create", help="Add new secret to target")
-@click.option("-l","--list", help="List secrets")
+@click.option("-c","--create", is_flag=True, default=False, show_default=True, help="Add new secret to target")
+@click.option("-l","--list", is_flag=True, default=False, show_default=True, help="List secrets")
 @click.option("-u","--update", help="Update secret")
 @click.option("-r","--remove", help="Remove secret")
 def secrets(create, list, update, remove):
     '''
     command to management secrets
     '''
-    Secrets()
+    if create: Secrets().create()
 
 kitcontrol.add_command(init)
 kitcontrol.add_command(add)
