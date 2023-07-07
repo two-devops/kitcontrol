@@ -21,16 +21,15 @@ class Secrets:
         """Check targets"""
         self.check.check_if_not_exist(self.config.targets_dir + "/" + target + ".yaml", "not found")
     
-    def file(self, target, secret):
+    def save_secret(self, target, secret):
         """Load file secrets or to create it""" 
         if not self.system.search(self.config.config_folder + "/secrets"):
             file = open(self.config.config_folder + "/secrets", 'w', encoding="utf-8")
             file.close()
         else:
             with open(self.config.config_folder + "/secrets", 'r', encoding="utf-8") as file:
-                lines = file.readlines()
-                print(lines)
-                for line in lines:
+                # lines = file.readlines()
+                for line in file:
                     if target in line:
                         print(style(f"\nInfo: target {target} exist\n", fg="yellow"))
                         sys.exit()
@@ -45,6 +44,15 @@ class Secrets:
         Show('targets').show_entity()
         target = prompt("Select Target")
         self.__checks(target)
-        self.file(target, secret)
+        self.save_secret(target, secret)
         print(style(f"\nAdd secret:{secret} in target: {target}", fg="green"))
+    
+    def show_secrets(self):
+        """Show secrets"""
+        with open(self.config.config_folder + "/secrets", 'r', encoding="utf-8") as file:
+            print(style("Secrets", fg="blue"))
+            print(style("-------", fg="blue"))
+            for line in file:
+                print(style(f'{line}', fg="green"))
+            
             
