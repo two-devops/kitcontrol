@@ -34,7 +34,7 @@ class Secrets:
 
     def load(self):
         """Load secret"""
-        file = open(self.config.config_folder + "/secrets", "a+", encoding="utf-8")
+        file = open(self.config.config_folder + "/secrets.env", "a+", encoding="utf-8")
         file.seek(0)
         try: 
             self.secrets = file.readlines()
@@ -43,17 +43,10 @@ class Secrets:
         finally:
             file.close()
 
-    def show(self):
-        """Show secret"""
-        print(style("Secrets", fg="blue"))
-        print(style("-------", fg="blue"))
-        for secret in self.secrets:
-            print(style(f'{secret}', fg="green"))
-
     def save(self, secret):
         """Save secret"""
         try: 
-            with open(self.config.config_folder + "/secrets", 'a', encoding="utf-8") as file:
+            with open(self.config.config_folder + "/secrets.env", 'a', encoding="utf-8") as file:
                 file.write(secret+"\n")
         except FileNotFoundError as errors:
             print(errors)
@@ -66,3 +59,10 @@ class Secrets:
         self.__checks(target)
         self.add(target, secret)
         print(style(f"\nAdd secret:{secret} in target: {target}", fg="green"))
+
+    def show(self):
+        """Show secret"""
+        print(style("Secrets", fg="blue"))
+        print(style("-------", fg="blue"))
+        for secret in self.secrets:
+            print(style(f'{secret}', fg="green"))
