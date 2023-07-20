@@ -76,8 +76,8 @@ def show(entity):
 
 @click.command(name="secrets")
 @click.option("-c","--create", is_flag=True, default=False, show_default=True, help="Add new secret to target")
+@click.option("-u","--update", is_flag=True, default=False, show_default=True, help="Update secret")
 @click.option("-s","--show", is_flag=True, default=False, show_default=True, help="List secrets")
-@click.option("-u","--update", help="Update secret")
 @click.option("-r","--remove", help="Remove secret")
 def secrets(create, show, update, remove):
     '''
@@ -85,6 +85,7 @@ def secrets(create, show, update, remove):
     '''
     secret = Secrets()
     if create: secret.create()
+    if update: secret.update()
     if show:   secret.show()
 
 kitcontrol.add_command(init)

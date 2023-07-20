@@ -24,14 +24,6 @@ class Secrets:
         """Check targets"""
         self.check.check_if_not_exist(self.config.targets_dir + "/" + target + ".yaml", "not found")
     
-    def add(self, target, secret):
-        """Add secret"""
-        for secr in self.secrets:
-            if target in secr:
-                print(style(f"\nInfo: target {target} exist\n", fg="yellow"))
-                sys.exit()
-        self.save(f"{target}={secret}")
-
     def load(self):
         """Load secret"""
         file = open(self.config.config_folder + "/secrets.env", "a+", encoding="utf-8")
@@ -43,11 +35,23 @@ class Secrets:
         finally:
             file.close()
 
+    def add(self, target, secret, action="add"):
+        """Add secret"""
+        for index, value in enumerate(self.secrets):
+            if target in value and "add" in action:
+                print(style(f"\nInfo: target {target} exist\n", fg="yellow"))
+                sys.exit()
+            elif target in value and "update" in action: 
+                self.secrets[index] = target+"="+secret+"\n"
+        if "add" in action: 
+            self.secrets.append(target+"="+secret+"\n")
+        self.save(self.secrets)
+
     def save(self, secret):
         """Save secret"""
         try: 
-            with open(self.config.config_folder + "/secrets.env", 'a', encoding="utf-8") as file:
-                file.write(secret+"\n")
+            with open(self.config.config_folder + "/secrets.env", 'w', encoding="utf-8") as file:
+                file.writelines(secret)
         except FileNotFoundError as errors:
             print(errors)
 
@@ -62,7 +66,23 @@ class Secrets:
 
     def show(self):
         """Show secret"""
+        print()
         print(style("Secrets", fg="blue"))
-        print(style("-------", fg="blue"))
+        print(style("#######", fg="blue"))
+        print("--------")
         for secret in self.secrets:
-            print(style(f'{secret}', fg="green"))
+            print(style(secret.replace("\n", ""), fg="green"))
+            print("--------")
+    
+    def update(self):
+        """Update passwords"""
+        self.show()
+        target = prompt("Select target")
+        secret = prompt("Enter secret", hide_input=True, confirmation_prompt=True)
+        self.__checks(target)
+        self.add(target, secret, "update")
+        print(style(f"\nUpdate secret: {secret} in target: {target}", fg="green"))
+
+    def remove(self):
+        """Delete passwords"""
+        pass
