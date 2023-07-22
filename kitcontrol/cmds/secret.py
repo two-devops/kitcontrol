@@ -46,7 +46,7 @@ class Secrets:
         if "add" in action: 
             self.secrets.append(target+"="+secret+"\n")
         self.save(self.secrets)
-
+    
     def save(self, secret):
         """Save secret"""
         try: 
@@ -54,6 +54,13 @@ class Secrets:
                 file.writelines(secret)
         except FileNotFoundError as errors:
             print(errors)
+
+    def delete(self, secret):
+        """Delete secret""" 
+        for index, value in enumerate(self.secrets):
+            if secret in value:
+                self.secrets.pop(index)
+        self.save(self.secrets)
 
     def create(self):
         """create secret"""
@@ -85,4 +92,8 @@ class Secrets:
 
     def remove(self):
         """Delete passwords"""
-        pass
+        self.show()
+        target = prompt("Select target to delete")
+        self.__checks(target)
+        self.delete(target)
+        print(style(f"\nDelete target: {target}", fg="green"))
