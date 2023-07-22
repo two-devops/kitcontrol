@@ -8,14 +8,13 @@ from config.config import Config
 class Add:
     """Class to create: kits, targets and pipelines"""
 
-    def __init__(self, entity, file, wizard=None):
+    def __init__(self, entity, file):
 
         self.config = Config()
         self.system = System()
         self.check = Checks()
         self.entity = entity
         self.file = file
-        self.wizard = wizard
         self.config.check_config()
         self.create()
 

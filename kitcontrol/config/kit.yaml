@@ -6,5 +6,5 @@ files:
   - files.sh
 
 # Values to change in the template
-values: 
-  worldof: Two-devops
+# values: 
+#   worldof: Two-devops

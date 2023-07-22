@@ -4,6 +4,7 @@ from cmds.init import Init
 from cmds.add import Add
 from cmds.run import Run
 from cmds.show import Show
+from cmds.secret import Secrets
 from cmds.remove import Remove
 
 ADD = ["kit", "target", "pipeline"]
@@ -63,21 +64,35 @@ def rm(entity_name, name):
     '''
     command to remove entities: kits, targets or pipelines
     '''
-    action = Remove(entity_name, name)
-    action.remove()
+    Remove(entity_name, name).remove()
     
 @click.command(name="show")
-# @click.option("-e", "--edit",help="edit kits, target or pipelines")
 @click.argument("entity", type=click.Choice(SHOW))
 def show(entity):
     '''
     command to show entities and edit
     '''
-    get = Show(entity)
-    get.show_entity()
+    Show(entity).show_entity()
+
+@click.command(name="secrets")
+@click.option("-c","--create", is_flag=True, default=False, show_default=True, help="Add new secret to target")
+@click.option("-u","--update", is_flag=True, default=False, show_default=True, help="Update secret")
+@click.option("-s","--show", is_flag=True, default=False, show_default=True, help="List secrets")
+@click.option("-r","--remove", is_flag=True, default=False, show_default=True, help="Remove secret")
+def secrets(create, show, update, remove):
+    '''
+    command to management secrets
+    '''
+    secret = Secrets()
+    if create: secret.create()
+    if update: secret.update()
+    if show:   secret.show()
+    if remove: secret.remove()
 
 kitcontrol.add_command(init)
 kitcontrol.add_command(add)
 kitcontrol.add_command(run)
 kitcontrol.add_command(show)
 kitcontrol.add_command(rm)
+kitcontrol.add_command(secrets)
+
