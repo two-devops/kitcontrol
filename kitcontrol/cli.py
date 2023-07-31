@@ -9,6 +9,7 @@ from cmds.remove import Remove
 
 ADD = ["kit", "target", "pipeline"]
 SHOW = ["kits", "targets", "pipelines"]
+SECRETS = ["create", "update", "remove"]
 
 @click.group(name='kitcontrol')
 def kitcontrol():
@@ -75,19 +76,26 @@ def show(entity):
     Show(entity).show_entity()
 
 @click.command(name="secrets")
-@click.option("-c","--create", is_flag=True, default=False, show_default=True, help="Add new secret to target")
-@click.option("-u","--update", is_flag=True, default=False, show_default=True, help="Update secret")
+# @click.option("-c","--create", is_flag=True, default=False, show_default=True, help="Add new secret to target")
+@click.option("-c","--create", help="Create - ej: kitcontrol secrets -c <target> = <secret>")
+@click.option("-u","--update", help="Update - ej: kitcontrol secrets -u <target> = <secret>")
+@click.option("-r","--remove", help="Remove - ej: kitcontrol secrets -r <target> = <secret>")
 @click.option("-s","--show", is_flag=True, default=False, show_default=True, help="List secrets")
-@click.option("-r","--remove", is_flag=True, default=False, show_default=True, help="Remove secret")
-def secrets(create, show, update, remove):
+@click.option('-i', '--interactive', type=click.Choice(SECRETS), help='Interactive mode to manager secrets')
+def secrets(create, show, update, remove, interactive):
     '''
     command to management secrets
-    '''
-    secret = Secrets()
-    if create: secret.create()
-    if update: secret.update()
+    ''' 
+    if not create and not update and not show and not remove and not interactive:
+        ctx = click.get_current_context()
+        click.echo(ctx.get_help())
+        ctx.exit()
+
+    secret = Secrets(interactive)
+    if create: secret.create(create)
+    if update: secret.update(update)
     if show:   secret.show()
-    if remove: secret.remove()
+    if remove: secret.remove(remove)
 
 kitcontrol.add_command(init)
 kitcontrol.add_command(add)
