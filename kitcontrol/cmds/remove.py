@@ -18,7 +18,7 @@ class Remove():
         self.config.check_config()
 
     def remove(self):
-        """remove fields and files"""
+        """remove folders and files"""
         if self.entity == "kit":
             self.check.check_if_not_exist(self.config.kits_dir + "/" + self.file, "not found")
             self.system.command('rm -rf ' + self.config.kits_dir + "/" + self.file)
