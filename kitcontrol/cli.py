@@ -4,7 +4,7 @@ from cmds.init import Init
 from cmds.add import Add
 from cmds.run import Run
 from cmds.show import Show
-from cmds.secret import Secrets
+from cmds.passwords import Passwords
 from cmds.remove import Remove
 
 ADD = ["kit", "target", "pipeline"]
@@ -75,14 +75,14 @@ def show(entity):
     '''
     Show(entity).show_entity()
 
-@click.command(name="secrets")
+@click.command(name="passwords")
 # @click.option("-c","--create", is_flag=True, default=False, show_default=True, help="Add new secret to target")
-@click.option("-c","--create", help="Create - ej: kitcontrol secrets -c <target> = <secret>")
-@click.option("-u","--update", help="Update - ej: kitcontrol secrets -u <target> = <secret>")
-@click.option("-r","--remove", help="Remove - ej: kitcontrol secrets -r <target> = <secret>")
-@click.option("-s","--show", is_flag=True, default=False, show_default=True, help="List secrets")
-@click.option('-i', '--interactive', type=click.Choice(SECRETS), help='Interactive mode to manager secrets')
-def secrets(create, show, update, remove, interactive):
+@click.option("-c","--create", help="Create - ej: kitcontrol passwords -c '<target> = <secret>'")
+@click.option("-u","--update", help="Update - ej: kitcontrol passwords -u '<target> = <secret>'")
+@click.option("-r","--remove", help="Remove - ej: kitcontrol passwords -r '<target> = <secret>'")
+@click.option("-s","--show", is_flag=True, default=False, show_default=True, help="List passwords")
+@click.option('-i', '--interactive', type=click.Choice(SECRETS), help='Interactive mode to manager passwords')
+def passwords(create, show, update, remove, interactive):
     '''
     command to management secrets
     ''' 
@@ -91,16 +91,16 @@ def secrets(create, show, update, remove, interactive):
         click.echo(ctx.get_help())
         ctx.exit()
 
-    secret = Secrets(interactive)
-    if create: secret.create(create)
-    if update: secret.update(update)
-    if show:   secret.show()
-    if remove: secret.remove(remove)
+    password = Passwords(interactive)
+    if create: password.create(create)
+    if update: password.update(update)
+    if show:   password.show()
+    if remove: password.remove(remove)
 
 kitcontrol.add_command(init)
 kitcontrol.add_command(add)
 kitcontrol.add_command(run)
 kitcontrol.add_command(show)
 kitcontrol.add_command(rm)
-kitcontrol.add_command(secrets)
+kitcontrol.add_command(passwords)
 

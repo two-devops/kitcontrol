@@ -10,7 +10,7 @@ from cmds.checks import Checks
 from cmds.show import Show
 from cmds.system import System
 
-class Secrets:
+class Passwords:
     """Class to create and management secrets"""
 
     pattern = r'[a-z0-9]+\s=\s.+'
@@ -39,7 +39,7 @@ class Secrets:
             
     def __load(self):
         """Load secret"""
-        file = open(self.config.config_folder + "/secrets.env", "a+", encoding="utf-8")
+        file = open(self.config.config_folder + "/passwords.env", "a+", encoding="utf-8")
         file.seek(0)
         try: 
             self.secrets = file.readlines()
