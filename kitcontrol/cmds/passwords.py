@@ -63,7 +63,7 @@ class Passwords:
     def __save(self, secret):
         """Save secret"""
         try: 
-            with open(self.config.config_folder + "/secrets.env", 'w', encoding="utf-8") as file:
+            with open(self.config.config_folder + "/passwords.env", 'w', encoding="utf-8") as file:
                 file.writelines(secret)
         except FileNotFoundError as errors:
             print(errors)
