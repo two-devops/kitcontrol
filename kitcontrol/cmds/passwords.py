@@ -13,7 +13,8 @@ from cmds.system import System
 class Passwords:
     """Class to create and management secrets"""
 
-    pattern = r'[a-z0-9]+\s=\s.+'
+    # pattern = r'[a-z0-9]+\s=\s.+'
+    pattern = r'[a-z0-9]+=.+'
 
     def __init__(self, interactive=None):
         self.check = Checks()
@@ -32,7 +33,7 @@ class Passwords:
     
     def __check_pattern(self, secrets):
         if secret := findall(self.pattern, secrets):
-            value = secret[0].split(" = ")
+            value = secret[0].split("=")
             return value[0], value[1]
         print(f"pattern '{self.pattern}' not match to '{secrets}'")
         sys.exit()
@@ -48,7 +49,6 @@ class Passwords:
         finally:
             file.close()
 
-    
     def __delete(self, target):
         """Delete secret""" 
         for index, value in enumerate(self.secrets):
@@ -82,7 +82,7 @@ class Passwords:
         """create secret"""
         if self.interactive == "create":
             Show('targets').show_entity()
-            target = prompt("Enter: target = secret")
+            target = prompt("Enter targer and password how to follow: target=secret")
         target, secret = self.__check_pattern(target)
         self.__checks(target)
         self.__add(target, secret)
@@ -92,7 +92,7 @@ class Passwords:
         """Update passwords"""
         if self.interactive == "update":
             self.show()
-            target = prompt("Enter: target = secret")
+            target = prompt("Enter targer and password how to follow: target=secret")
         target, secret = self.__check_pattern(target)
         self.__checks(target)
         self.__add(target, secret, "update")
