@@ -4,6 +4,12 @@ It is a tool to automatically install applications and services on remote target
 
 Awesome tool for Install Kits ;)
 
+## Install kitcontrol as editable local package
+
+```bash
+pipenv install -e .
+```
+
 ## Test with docker ssh image
 
 <https://docs.linuxserver.io/images/docker-openssh-server>

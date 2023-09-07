@@ -13,7 +13,7 @@ mergedeep = "*"
 fabric = "*"
 decorator = "*"
 jinja2 = "*"
-kitcontrol = {editable = true, path = "."}
+kitcontrol = {file = ".", editable = true}
 
 [dev-packages]
 
