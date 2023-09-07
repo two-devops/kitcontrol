@@ -77,14 +77,18 @@ def show(entity):
 
 @click.command(name="passwords")
 # @click.option("-c","--create", is_flag=True, default=False, show_default=True, help="Add new secret to target")
-@click.option("-c","--create", help="Create - ej: kitcontrol passwords -c '<target> = <secret>'")
-@click.option("-u","--update", help="Update - ej: kitcontrol passwords -u '<target> = <secret>'")
-@click.option("-r","--remove", help="Remove - ej: kitcontrol passwords -r '<target> = <secret>'")
+@click.option("-c","--create", help="""\b
+              Create - ex: kitcontrol passwords -c target=password""")
+@click.option("-u","--update", help="""\b
+              Update - ex: kitcontrol passwords -u target=password""")
+@click.option("-r","--remove", help="""\b
+              Remove - ex: kitcontrol passwords -r target=password""")
 @click.option("-s","--show", is_flag=True, default=False, show_default=True, help="List passwords")
-@click.option('-i', '--interactive', type=click.Choice(SECRETS), help='Interactive mode to manager passwords')
+@click.option('-i', '--interactive', type=click.Choice(SECRETS), help="""\b
+              Interactive mode to manager passwords""")
 def passwords(create, show, update, remove, interactive):
     '''
-    command to management secrets
+    command to management passwords
     ''' 
     if not create and not update and not show and not remove and not interactive:
         ctx = click.get_current_context()
