@@ -39,7 +39,7 @@ class Passwords:
         sys.exit()
             
     def __load(self):
-        """Load secret"""
+        """Load secrets"""
         file = open(self.config.config_folder + "/passwords.env", "a+", encoding="utf-8")
         file.seek(0)
         try: 
