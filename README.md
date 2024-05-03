@@ -4,7 +4,7 @@ It is a tool to automatically install applications and services on remote target
 
 Awesome tool for Install Kits ;)
 
-## Install kitcontrol as editable local packages
+## Install kitcontrol as editable local package
 
 ```bash
 pipenv install -e .
